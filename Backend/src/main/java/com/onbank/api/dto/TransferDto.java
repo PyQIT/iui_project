@@ -18,24 +18,14 @@ public class TransferDto {
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
-
     private String recipientName;
-
     private String recipientAccountNumber;
-
     private String description;
-
     @Enumerated(EnumType.STRING)
     private OperationType OperationType;
-
     private BigDecimal amount;
-
-    private BigDecimal accountBalance;
-
     private TransferState realizationState;
-
     private String senderName;
-
     private String senderAccountNumber;
 
 }

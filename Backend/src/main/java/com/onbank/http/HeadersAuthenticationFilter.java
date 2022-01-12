@@ -2,6 +2,7 @@ package com.onbank.http;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -12,6 +13,7 @@ import java.io.IOException;
 
 import static org.springframework.boot.context.properties.source.ConfigurationPropertyName.isValid;
 
+@Component
 public class HeadersAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
@@ -20,7 +22,6 @@ public class HeadersAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String userID = request.getHeader("userID");
-
         if (!isValid(userID)) {
             throw new SecurityException();
         }
@@ -28,6 +29,7 @@ public class HeadersAuthenticationFilter extends OncePerRequestFilter {
 
         Authentication auth = new AuthenticationToken(id);
         SecurityContextHolder.getContext().setAuthentication(auth);
+        System.out.println(SecurityContextHolder.getContext().getAuthentication());
 
         filterChain.doFilter(request, response);
     }

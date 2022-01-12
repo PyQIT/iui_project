@@ -91,7 +91,6 @@ class TransferControllerTest {
 
         fromDB.get(0).setId(null);
         fromDB.get(0).setRealizationState(null);
-        fromDB.get(0).setAccountBalance(null);
         fromDB.get(0).setSenderName(null);
         fromDB.get(0).setSenderAccountNumber(null);
 
@@ -105,7 +104,6 @@ class TransferControllerTest {
         BigDecimal bigDecimal = new BigDecimal(32324.3);
         Transfer transfer = new Transfer();
         transfer.setOperationType(OperationType.INSTANT);
-        transfer.setAccountBalance(bigDecimal);
         transfer.setRecipientAccountNumber("PL13114000000787349936948743");
         transfer.setSenderAccountNumber("PL48105000021021290496211203");
         transfer.setAmount(bigDecimal);

@@ -31,7 +31,6 @@ public class TestTransferToCSV {
         BigDecimal bigDecimal = new BigDecimal("32324.3");
         Transfer transfer = new Transfer();
         transfer.setOperationType(OperationType.INSTANT);
-        transfer.setAccountBalance(bigDecimal);
         transfer.setRecipientAccountNumber("PL32349188939421535264612669");
         transfer.setSenderAccountNumber("PL32349188939421535264612669");
         transfer.setAmount(bigDecimal);

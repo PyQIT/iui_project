@@ -1,6 +1,5 @@
 package com.onbank.api.controller;
 
-import com.onbank.Mocks;
 import com.onbank.api.dto.CreateTransferDto;
 import com.onbank.api.dto.TransferDetailsDto;
 import com.onbank.api.dto.TransferDto;
@@ -15,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,8 +46,6 @@ public class TransferController {
     public void createTransfer(@Valid @RequestBody CreateTransferDto transferDto) {
         Transfer tmpTransfer = TransferTransformer.convertToEntity(transferDto);
 
-        tmpTransfer.setAccountBalance(new BigDecimal("0.00"));
-        tmpTransfer.setSenderAccountNumber(Mocks.getMockUser().getAccountNumber());
         tmpTransfer.setRealizationState(TransferState.WAITING);
         transferService.createTransfer(tmpTransfer);
     }

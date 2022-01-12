@@ -1,10 +1,12 @@
 package com.onbank.starter;
 
+import com.onbank.api.model.Account;
 import com.onbank.api.model.Transfer;
 import com.onbank.api.model.User;
 import com.onbank.api.model.enums.Nationality;
 import com.onbank.api.model.enums.OperationType;
 import com.onbank.api.model.enums.TransferState;
+import com.onbank.api.repository.AccountRepository;
 import com.onbank.api.repository.TransferRepository;
 import com.onbank.api.repository.UserRepository;
 import lombok.Getter;
@@ -32,14 +34,17 @@ public class InitMockDB {
     private TransferRepository transferRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
     @PostConstruct
     public void init(){
         this.initTransfers();
+        this.initAccounts();
         this.initUsers();
     }
 
-    private void initUsers(){
+    private void initAccounts(){
         List<Transfer> firstUserTransfers = new ArrayList<>();
         firstUserTransfers.add(transferRepository.getOne(1L));
         firstUserTransfers.add(transferRepository.getOne(3L));
@@ -49,6 +54,27 @@ public class InitMockDB {
         firstUserTransfers.add(transferRepository.getOne(7L));
         firstUserTransfers.add(transferRepository.getOne(8L));
         firstUserTransfers.add(transferRepository.getOne(9L));
+
+        accountRepository.save(new Account(
+                ACCOUNT_NUMBER_1,
+                "Qwerty1",
+                new BigDecimal("12000.20"),
+                firstUserTransfers,
+                1L
+        ));
+
+        List<Transfer> secondUserTransfers = new ArrayList<>();
+        secondUserTransfers.add(transferRepository.getOne(2L));
+        accountRepository.save(new Account(
+                ACCOUNT_NUMBER_2,
+                "Qwerty2",
+                new BigDecimal("25300.20"),
+                secondUserTransfers,
+                2L
+        ));
+    }
+
+    private void initUsers(){
         userRepository.save(new User(
                 "Łukasz",
                 "Nowak",
@@ -60,10 +86,8 @@ public class InitMockDB {
                 LocalDate.of(1991, 5, 5),
                 "Wasilewska",
                 "AYC934855",
-                firstUserTransfers
+                accountRepository.getOne(1L)
         ));
-        List<Transfer> secondUserTransfers = new ArrayList<>();
-        secondUserTransfers.add(transferRepository.getOne(2L));
         userRepository.save(new User(
                 "Mariusz",
                 "Kowalski",
@@ -75,7 +99,7 @@ public class InitMockDB {
                 LocalDate.of(1990, 1, 1),
                 "Nowak",
                 "AAB934438",
-                secondUserTransfers
+                accountRepository.getOne(2L)
         ));
     }
 
@@ -87,7 +111,6 @@ public class InitMockDB {
                 "Przykładowy przelew z utf-8.",
                 OperationType.NORMAL,
                 new BigDecimal("150.0"),
-                new BigDecimal("2400.0"),
                 TransferState.REALIZED,
                 ACCOUNT_NAME_2,
                 ACCOUNT_NUMBER_2
@@ -100,7 +123,6 @@ public class InitMockDB {
                 "Przelew za zakupy.",
                 OperationType.NORMAL,
                 new BigDecimal("150.0"),
-                new BigDecimal("2250.0"),
                 TransferState.REALIZED,
                 ACCOUNT_NAME_2,
                 ACCOUNT_NUMBER_2
@@ -113,7 +135,6 @@ public class InitMockDB {
                 "Sprzedaż oprogramowania.",
                 OperationType.NORMAL,
                 new BigDecimal("1150.0"),
-                new BigDecimal("3000.0"),
                 TransferState.WAITING,
                 ACCOUNT_NAME_1,
                 ACCOUNT_NUMBER_1
@@ -126,7 +147,6 @@ public class InitMockDB {
                 "Prezent gwiazdkowy.",
                 OperationType.NORMAL,
                 new BigDecimal("150.0"),
-                new BigDecimal("2000.0"),
                 TransferState.REALIZED,
                 ACCOUNT_NAME_2,
                 ACCOUNT_NUMBER_2
@@ -139,7 +159,6 @@ public class InitMockDB {
                 "Przelew na piwo.",
                 OperationType.NORMAL,
                 new BigDecimal("15.0"),
-                new BigDecimal("2000.0"),
                 TransferState.REALIZED,
                 ACCOUNT_NAME_1,
                 ACCOUNT_NUMBER_1
@@ -152,7 +171,6 @@ public class InitMockDB {
                 "Prezent urodzinowy.",
                 OperationType.NORMAL,
                 new BigDecimal("15.0"),
-                new BigDecimal("2000.0"),
                 TransferState.REALIZED,
                 ACCOUNT_NAME_2,
                 ACCOUNT_NUMBER_2
@@ -165,7 +183,6 @@ public class InitMockDB {
                 "Kredyt na ogrzewanie",
                 OperationType.NORMAL,
                 new BigDecimal("1500.0"),
-                new BigDecimal("3000.0"),
                 TransferState.REALIZED,
                 ACCOUNT_NAME_2,
                 ACCOUNT_NUMBER_2
@@ -178,7 +195,6 @@ public class InitMockDB {
                 "Przelew bez okazji.",
                 OperationType.NORMAL,
                 new BigDecimal("150.0"),
-                new BigDecimal("2000.0"),
                 TransferState.WAITING,
                 ACCOUNT_NAME_2,
                 ACCOUNT_NUMBER_2
@@ -191,7 +207,6 @@ public class InitMockDB {
                 "Pieniądze dla studentów",
                 OperationType.NORMAL,
                 new BigDecimal("1.0"),
-                new BigDecimal("20.0"),
                 TransferState.WAITING,
                 ACCOUNT_NAME_2,
                 ACCOUNT_NUMBER_2

@@ -48,7 +48,6 @@ public class CSVTransferDto {
         if (dto.getOperationType() != null)
             transfer.setOperationType(Enum.valueOf(OperationType.class, dto.getOperationType()));
         transfer.setAmount(dto.getAmount());
-        transfer.setAccountBalance(dto.getAccountBalance());
         if (dto.getRealizationState() != null)
             transfer.setRealizationState(Enum.valueOf(TransferState.class, dto.getRealizationState()));
         transfer.setSenderName(dto.getSenderName());
@@ -66,7 +65,6 @@ public class CSVTransferDto {
         dto.setDescription(transfer.getDescription());
         dto.setOperationType(transfer.getOperationType().name());
         dto.setAmount(transfer.getAmount());
-        dto.setAccountBalance(transfer.getAccountBalance());
         dto.setRealizationState(transfer.getRealizationState().name());
         dto.setSenderName(transfer.getSenderName());
         dto.setSenderAccountNumber(transfer.getSenderAccountNumber());

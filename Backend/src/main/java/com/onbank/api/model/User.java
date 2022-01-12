@@ -3,10 +3,7 @@ package com.onbank.api.model;
 import com.onbank.api.model.enums.Nationality;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
@@ -51,11 +48,11 @@ public class User extends EntityCore {
     private LocalDate birthDate;
 
     @Column(name = "mothermaidenname", nullable = false)
-    private String motherMaidenName; // NAZWISKO RODOWE MATKI
+    private String motherMaidenName;
 
     @Column(name = "idNumber", nullable = false)
-    private String idNumber; // NUMER DOWODU OSOBISTEGO
+    private String idNumber;
 
-    @OneToMany
-    private List<Transfer> transfers;
+    @OneToOne
+    private Account account;
 }

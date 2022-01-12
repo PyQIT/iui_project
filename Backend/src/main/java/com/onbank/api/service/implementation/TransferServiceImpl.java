@@ -20,30 +20,17 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public List<Transfer> getTransfers() {
-        if (UserData.getUser().getId() == 1)
-            return transferRepository.getTransfersByRealizationState(
-                    TransferState.REALIZED
-            );
-        else
-            return transferRepository.getTransfersByRealizationState(
-                    TransferState.REALIZED
-            );
+        return transferRepository.getTransfersByRealizationState(
+                TransferState.REALIZED
+        );
     }
 
     @Override
     public List<Transfer> getLockedTransactions() {
-        if (UserData.getUser().getId() == 1) {
-            return transferRepository.getTransfersByRealizationStateOrRealizationState(
-                    TransferState.WAITING,
-                    TransferState.IN_PROGRESS
-            );
-        }
-        else {
-            return  transferRepository.getTransfersByRealizationStateOrRealizationState(
-                    TransferState.WAITING,
-                    TransferState.IN_PROGRESS
-            );
-        }
+        return transferRepository.getTransfersByRealizationStateOrRealizationState(
+                TransferState.WAITING,
+                TransferState.IN_PROGRESS
+        );
     }
 
     @Override

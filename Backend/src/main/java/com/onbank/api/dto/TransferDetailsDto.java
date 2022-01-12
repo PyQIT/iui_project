@@ -25,7 +25,6 @@ public class TransferDetailsDto {
     private String description;
     private OperationType OperationType;
     private BigDecimal amount;
-    private BigDecimal accountBalance;
     private TransferState realizationState;
     private String senderName;
     private String senderAccountNumber;
