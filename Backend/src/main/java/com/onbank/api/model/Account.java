@@ -20,8 +20,11 @@ public class Account extends EntityCore {
     private String number;
 
     @Column(name = "password", nullable = false, unique = true)
-    @Size(min = 6, max = 20)
+    @Size(min = 5, max = 60)
     private String password;
+
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
 
     @Column(name = "accountbalance", nullable = false)
     private BigDecimal accountBalance;

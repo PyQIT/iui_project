@@ -13,7 +13,7 @@ import java.io.IOException;
 
 import static org.springframework.boot.context.properties.source.ConfigurationPropertyName.isValid;
 
-@Component
+/*@Component
 public class HeadersAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
@@ -23,9 +23,10 @@ public class HeadersAuthenticationFilter extends OncePerRequestFilter {
 
         String userID = request.getHeader("userID");
         if (!isValid(userID)) {
-            throw new SecurityException();
+            //throw new SecurityException();
         }
-        Long id = Long.valueOf(userID);
+        //Long id = Long.valueOf(userID);
+        Long id = 1L;
 
         Authentication auth = new AuthenticationToken(id);
         SecurityContextHolder.getContext().setAuthentication(auth);
@@ -33,4 +34,4 @@ public class HeadersAuthenticationFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
-}
+}*/
