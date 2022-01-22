@@ -57,8 +57,6 @@ public class InitMockDB {
 
         accountRepository.save(new Account(
                 ACCOUNT_NUMBER_1,
-                "$2a$12$UULg1Wju7WzYt2HuOPu9yOH5JAFVN4ORw9fhIU3IdMGebhRMsStR.", //"pass1" 12 rounds
-                "user1",
                 new BigDecimal("12000.20"),
                 firstUserTransfers,
                 1L
@@ -68,8 +66,6 @@ public class InitMockDB {
         secondUserTransfers.add(transferRepository.getOne(2L));
         accountRepository.save(new Account(
                 ACCOUNT_NUMBER_2,
-                "$2a$12$TVlHZXcS5mRc4pktrIesoeSMMMV1h7/yduzl/D4wXe0BB8v0jgrYy", //"pass2"
-                "user2",
                 new BigDecimal("25300.20"),
                 secondUserTransfers,
                 2L
@@ -82,6 +78,8 @@ public class InitMockDB {
                 "Nowak",
                 "765966234",
                 "lukasz.n@gmail.com",
+                "user1",
+                "$2a$12$UULg1Wju7WzYt2HuOPu9yOH5JAFVN4ORw9fhIU3IdMGebhRMsStR.", //"pass1" 12 rounds
                 "91050500543",
                 Nationality.PL,
                 "Warszawa",
@@ -95,6 +93,8 @@ public class InitMockDB {
                 "Kowalski",
                 "475684665",
                 "mariusz.k@gmail.com",
+                "user2",
+                "$2a$12$TVlHZXcS5mRc4pktrIesoeSMMMV1h7/yduzl/D4wXe0BB8v0jgrYy", //"pass2"
                 "90010122002",
                 Nationality.PL,
                 "Kraków",

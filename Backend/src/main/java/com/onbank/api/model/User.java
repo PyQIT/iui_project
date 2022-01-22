@@ -3,12 +3,14 @@ package com.onbank.api.model;
 import com.onbank.api.model.enums.Nationality;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
@@ -32,6 +34,12 @@ public class User extends EntityCore {
     @Column(name = "email", nullable = false)
     @Email
     private String email;
+
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
+
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name = "pesel", nullable = false, unique = true)
     @Size(min = 11, max = 11)
