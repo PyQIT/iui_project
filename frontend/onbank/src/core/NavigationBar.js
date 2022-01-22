@@ -19,16 +19,15 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
-import { AccountCircle, SwapHoriz, ViewHeadline, ViewList } from '@material-ui/icons';
-// import { Home} from '@material-ui/icons';
+import { AccountCircle, SwapHoriz, ViewHeadline, ViewList, AccountBalanceWallet } from '@material-ui/icons';
 import { paths } from 'routes/paths';
 import { useStyles } from 'themes/appBarTheme';
 import { getUserProfileAction } from 'actions/userProfileActions';
 
 const bookmarkArray = [
-  //{ name: 'Strona główna', path: paths.home, icon: <Home /> },
   { name: 'Transakcje', path: paths.transactions, icon: <ViewList /> },
   { name: 'Przelew', path: paths.newTransfer, icon: <SwapHoriz /> },
+  { name: 'Lokaty', path: paths.newDeposit, icon: <AccountBalanceWallet /> },
 ];
 
 const NavigationBar = ({ location, userProfile, getUserProfile }) => {

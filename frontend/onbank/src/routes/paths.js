@@ -5,4 +5,5 @@ export const paths = {
   pendingTransactions: '/transactions/pending-transactions',
   newTransfer: '/new-transfer',
   detailsTransaction: '/transactions/details-transactions/:idTransaction',
+  newDeposit: '/new-deposit',
 };
