@@ -2,8 +2,10 @@ package com.onbank.api.model;
 
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -18,13 +20,6 @@ public class Account extends EntityCore {
 
     @Column(name = "number", nullable = false)
     private String number;
-
-    @Column(name = "password", nullable = false, unique = true)
-    @Size(min = 5, max = 60)
-    private String password;
-
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
 
     @Column(name = "accountbalance", nullable = false)
     private BigDecimal accountBalance;
