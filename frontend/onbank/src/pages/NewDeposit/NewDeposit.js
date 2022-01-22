@@ -23,16 +23,7 @@ import 'react-input-range/lib/css/index.css';
 const NewDeposit = ({ sendTransactions, isLoading, isSuccess, setIsSuccess }) => {
     const classes = useStyles();
     const [setBankName] = useState(null);
-
-    constructor(props)
-    {
-        super(props);
-
-        this.state = {
-            value: { min: 2, max: 10 },
-        };
-    }
-
+    let depositAmount = 0;
 
         return (
             <Paper className={classes.root}>
@@ -43,7 +34,6 @@ const NewDeposit = ({ sendTransactions, isLoading, isSuccess, setIsSuccess }) =>
                         description: '',
                         amount: '',
                         date: new Date(),
-                        typeTransfer: 'NORMAL',
                         saveReceiver: false,
                     }}
                     validationSchema={() => newTransferSchema(setBankName)}
@@ -67,8 +57,9 @@ const NewDeposit = ({ sendTransactions, isLoading, isSuccess, setIsSuccess }) =>
                                         <InputRange
                                             maxValue={values.amount}
                                             minValue={0}
-                                            value={this.state.amount}
-                                            onChange={amount => this.setState({amount})}
+                                            value={depositAmount}
+                                            onChange={handleChange(depositAmount)}
+                                            onBlur={handleBlur(depositAmount)}
                                         />
                                         {errors.amount && touched.amount ? (
                                             <FormHelperText id="amount-error-text">{errors.amount}</FormHelperText>
