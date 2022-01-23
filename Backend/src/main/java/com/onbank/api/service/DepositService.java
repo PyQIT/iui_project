@@ -7,4 +7,5 @@ public interface DepositService {
     Deposit createDeposit(Deposit deposit);
     Deposit getDeposit(Long id);
     Deposit getDepositByAccount(Account account);
+    Deposit getDeposit();
 }

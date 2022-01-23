@@ -2,8 +2,6 @@ package com.onbank.api.transformer;
 
 import com.onbank.api.dto.UserDto;
 import com.onbank.api.model.User;
-import com.onbank.http.UserData;
-import com.onbank.starter.InitMockDB;
 import org.springframework.beans.BeanUtils;
 
 public class UserTransformer {

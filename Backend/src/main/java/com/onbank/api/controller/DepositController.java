@@ -2,6 +2,7 @@ package com.onbank.api.controller;
 
 import com.onbank.api.dto.DepositDto;
 import com.onbank.api.model.Account;
+import com.onbank.api.model.Deposit;
 import com.onbank.api.service.DepositService;
 import com.onbank.api.service.UserService;
 import com.onbank.api.transformer.DepositTransformer;
@@ -32,7 +33,7 @@ public class DepositController {
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public void createDeposit(@Valid @RequestBody DepositDto depositDto) {
-
+        //TODO: Potrzebna walidacja!!!!!! Dane tworzącego powinny weryfikowane lub uzupełniane automatycznie
         depositService.createDeposit(DepositTransformer.convertToEntity(depositDto));
     }
 
@@ -46,6 +47,27 @@ public class DepositController {
     @ResponseStatus(HttpStatus.OK)
     public BigDecimal getBalanceByUserId(@PathVariable Long userId){
         return depositService.getDeposit(userService.getUser(userId).getId()).getDepositBalance();
+    }
+
+
+
+
+
+
+    @GetMapping("/balance")
+    @ResponseStatus(HttpStatus.OK)
+    public BigDecimal getBalance(){
+        Deposit deposit = depositService.getDeposit();
+        if (deposit != null) {
+            return deposit.getDepositBalance();
+        }
+        return BigDecimal.ZERO;
+    }
+
+    @GetMapping("")
+    @ResponseStatus(HttpStatus.OK)
+    public DepositDto getDeposit(){
+        return DepositTransformer.convertToDto(depositService.getDeposit());
     }
 
 }

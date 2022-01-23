@@ -7,7 +7,9 @@ public interface AccountService {
 
     Account getAccountByUserId(Long id);
 
+    Account getAccountById(Long id);
+
     Account createAccount(Account account);
 
-    Account getAccountById(Long id);
+    Account getAccount();
 }

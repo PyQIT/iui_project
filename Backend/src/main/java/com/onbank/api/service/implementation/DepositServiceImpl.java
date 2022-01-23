@@ -6,6 +6,7 @@ import com.onbank.api.repository.AccountRepository;
 import com.onbank.api.repository.DepositRepository;
 import com.onbank.api.service.DepositService;
 import com.onbank.exceptions.AccountNotFoundException;
+import com.onbank.http.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class DepositServiceImpl implements DepositService {
 
     private final DepositRepository depositRepository;
     private final AccountRepository accountRepository;
+    private final AuthUser authUser;
 
     @Override
     public Deposit createDeposit(Deposit deposit){
@@ -40,6 +42,11 @@ public class DepositServiceImpl implements DepositService {
 
     @Override
     public Deposit getDepositByAccount(Account account){
-        return depositRepository.getDepositByAccount(account);
+        return depositRepository.getDepositByAccount(account).orElse(null);
+    }
+
+    @Override
+    public Deposit getDeposit() {
+        return depositRepository.getDepositByAccount(authUser.getUser().getAccount()).orElse(null);
     }
 }

@@ -4,6 +4,7 @@ import com.onbank.api.model.Account;
 import com.onbank.api.repository.AccountRepository;
 import com.onbank.api.service.AccountService;
 import com.onbank.exceptions.AccountNotFoundException;
+import com.onbank.http.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
+    private final AuthUser authUser;
 
     @Override
     public Account getAccountByNumber(String number) {
@@ -26,6 +28,11 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account createAccount (Account account) {
         return accountRepository.save(account);
+    }
+
+    @Override
+    public Account getAccount() {
+        return authUser.getUser().getAccount();
     }
 
     @Override

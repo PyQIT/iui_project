@@ -3,6 +3,7 @@ package com.onbank.api.controller;
 import com.onbank.api.dto.AccountDto;
 import com.onbank.api.service.AccountService;
 import com.onbank.api.transformer.AccountTransformer;
+import com.onbank.http.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 @Validated
 public class AccountController {
     private final AccountService accountService;
+    private final AuthUser authUser;
 
     @GetMapping("/number/{number}")
     @ResponseStatus(HttpStatus.OK)
@@ -42,4 +44,15 @@ public class AccountController {
     public AccountDto getAccountById(@PathVariable Long id){
         return AccountTransformer.convertToDto(accountService.getAccountById(id));
     }
+
+
+
+
+
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public AccountDto getAccount() {
+        return AccountTransformer.convertToDto(accountService.getAccount());
+    }
+
 }

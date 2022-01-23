@@ -4,9 +4,8 @@ import com.onbank.api.model.Transfer;
 import com.onbank.api.model.enums.TransferState;
 import com.onbank.api.repository.TransferRepository;
 import com.onbank.api.service.TransferService;
-import com.onbank.http.UserData;
-import com.onbank.starter.InitMockDB;
 import com.onbank.exceptions.TransferNotFoundException;
+import com.onbank.http.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,32 +16,36 @@ import java.util.List;
 public class TransferServiceImpl implements TransferService {
 
     private final TransferRepository transferRepository;
+    private final AuthUser authUser;
 
     @Override
     public List<Transfer> getTransfers() {
-        return transferRepository.getTransfersByRealizationState(
-                TransferState.REALIZED
+        return transferRepository.getTransferByRealizationStateAndSenderAccountNumber(
+                TransferState.REALIZED,
+                authUser.getUser().getAccount().getNumber()
         );
     }
 
     @Override
     public List<Transfer> getLockedTransactions() {
-        return transferRepository.getTransfersByRealizationStateOrRealizationState(
-                TransferState.WAITING,
-                TransferState.IN_PROGRESS
+        return transferRepository.getTransferByRealizationStateInAndSenderAccountNumber(
+                List.of(TransferState.WAITING, TransferState.IN_PROGRESS),
+                authUser.getUser().getAccount().getNumber()
         );
     }
 
     @Override
     public Transfer createTransfer(Transfer transfer) {
-        transfer.setSenderName(UserData.getUser().getName());
+        transfer.setSenderName(authUser.getUser().getName());
         return transferRepository.save(transfer);
     }
 
     @Override
     public Transfer getTransfer(Long id) {
-        return transferRepository.findById(id).orElseThrow(
-                () -> new TransferNotFoundException("Transfer id=" + id + " not found.")
+        return transferRepository.findByIdAndSenderAccountNumber(
+                id,
+                authUser.getUser().getAccount().getNumber()
+        ).orElseThrow(() -> new TransferNotFoundException("Transfer id=" + id + " not found.")
         );
     }
 }
