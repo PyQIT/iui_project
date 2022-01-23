@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -27,6 +24,7 @@ public class Deposit  extends EntityCore  {
     @Column(name = "depositInterest", nullable = false)
     private BigDecimal depositInterest;
     @OneToOne
+    @JoinColumn(name = "account")
     private Account account;
     @NotNull(message = "Date cannot be empty.")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
