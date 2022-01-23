@@ -27,7 +27,6 @@ public class Deposit  extends EntityCore  {
     @Column(name = "depositInterest", nullable = false)
     private BigDecimal depositInterest;
     @OneToOne
-    @Column(name = "account", nullable = false)
     private Account account;
     @NotNull(message = "Date cannot be empty.")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
