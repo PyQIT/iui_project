@@ -1,4 +1,4 @@
-package com.onbank;
+package com.onbank.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-@EnableJpaRepositories
+@EnableJpaRepositories("com.onbank.api.repository")
 @Configuration
 @EnableTransactionManagement
 @EnableJpaAuditing
@@ -50,7 +50,7 @@ public class DatabaseConfig {
 
 
     @Bean
-    @PostConstruct
+//    @PostConstruct
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(DriverClassName);

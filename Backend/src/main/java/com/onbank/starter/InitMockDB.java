@@ -30,12 +30,15 @@ public class InitMockDB {
     @Getter
     private static final String ACCOUNT_NUMBER_2 = "PL48105000021021290496211203";
 
-    @Autowired
-    private TransferRepository transferRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private AccountRepository accountRepository;
+    private final TransferRepository transferRepository;
+    private final UserRepository userRepository;
+    private final AccountRepository accountRepository;
+
+    public InitMockDB(TransferRepository transferRepository, UserRepository userRepository, AccountRepository accountRepository) {
+        this.transferRepository = transferRepository;
+        this.userRepository = userRepository;
+        this.accountRepository = accountRepository;
+    }
 
     @PostConstruct
     public void init(){

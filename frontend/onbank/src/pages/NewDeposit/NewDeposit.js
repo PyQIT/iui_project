@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Formik, Form } from 'formik';
@@ -15,7 +15,7 @@ import { paths } from 'routes/paths';
 import { sendTransactionsAction, setIsSuccessAction } from 'actions/transactionsActions';
 import { useStyles } from 'themes/newDepositTheme';
 import { colorthemeButtonAndDate } from 'themes/customTheme';
-import InputRange from 'react-input-range';
+import Slider from 'react-input-slider';
 import { newTransferSchema } from './newDepositSchema';
 import 'react-input-range/lib/css/index.css';
 
@@ -23,7 +23,7 @@ import 'react-input-range/lib/css/index.css';
 const NewDeposit = ({ sendTransactions, isLoading, isSuccess, setIsSuccess }) => {
     const classes = useStyles();
     const [setBankName] = useState(null);
-    let depositAmount = 0;
+    const [state, setState] = useState({ x: 10});
 
         return (
             <Paper className={classes.root}>
@@ -54,13 +54,15 @@ const NewDeposit = ({ sendTransactions, isLoading, isSuccess, setIsSuccess }) =>
                                         className={classes.textFieldAmount}
                                         error={!!(errors.amount && touched.amount)}
                                     >
-                                        <InputRange
-                                            maxValue={values.amount}
-                                            minValue={0}
-                                            value={depositAmount}
-                                            onChange={handleChange(depositAmount)}
-                                            onBlur={handleBlur(depositAmount)}
+                                        <Slider className={classes.amoutSlider}
+                                            axis="x"
+                                            x={state.x}
+                                            xmin={0}
+                                            xmax={10000}
+                                            onChange={({ x }) => setState(state => ({ ...state, x }))}
                                         />
+                                        <h3><center>Kwota: {state.x}</center></h3>
+
                                         {errors.amount && touched.amount ? (
                                             <FormHelperText id="amount-error-text">{errors.amount}</FormHelperText>
                                         ) : null}

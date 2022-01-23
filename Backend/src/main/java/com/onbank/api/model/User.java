@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "`user`")
 @EqualsAndHashCode(callSuper = false)
 public class User extends EntityCore {
 
