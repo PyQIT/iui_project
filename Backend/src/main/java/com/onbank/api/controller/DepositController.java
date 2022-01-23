@@ -3,6 +3,7 @@ package com.onbank.api.controller;
 import com.onbank.api.dto.DepositDto;
 import com.onbank.api.model.Account;
 import com.onbank.api.service.DepositService;
+import com.onbank.api.service.UserService;
 import com.onbank.api.transformer.DepositTransformer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 
 @CrossOrigin
 @RestController
@@ -18,6 +20,7 @@ import javax.validation.Valid;
 @Validated
 public class DepositController {
     private final DepositService depositService;
+    private final UserService userService;
 
     @GetMapping("/user")
     @ResponseStatus(HttpStatus.OK)
@@ -37,6 +40,12 @@ public class DepositController {
     @ResponseStatus(HttpStatus.OK)
     public DepositDto getDepositById(@PathVariable Long id){
         return DepositTransformer.convertToDto(depositService.getDeposit(id));
+    }
+
+    @GetMapping("/balance/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public BigDecimal getBalanceByUserId(@PathVariable Long userId){
+        return depositService.getDeposit(userService.getUser(userId).getId()).getDepositBalance();
     }
 
 }
