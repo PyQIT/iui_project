@@ -16,6 +16,10 @@ export const useStyles = makeStyles(theme => ({
             flexDirection: 'column',
         },
     },
+    amoutSlider:{
+        width: '100% !important',
+        backgroundColor: '#27ae6059 !important'
+    },
     recieverInput: {
         marginBottom: 20,
         marginTop: 20,
