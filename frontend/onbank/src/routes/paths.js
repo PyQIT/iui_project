@@ -6,4 +6,6 @@ export const paths = {
   newTransfer: '/new-transfer',
   detailsTransaction: '/transactions/details-transactions/:idTransaction',
   newDeposit: '/new-deposit',
+  login: '/login',
+  register: '/register',
 };

@@ -9,6 +9,9 @@ const axiosInstancePost = axios.create({ baseURL });
 
 const axiosInstanceJTB = axios.create({ baseURL: jakitobankURL });
 
+const accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTY0Mjk4MDM3OCwiaWF0IjoxNjQyOTYyMzc4fQ.Iobjm6pNpdufSb6nyIOeArqe_FOyW8NI6ohUdk6Ml2Gw8nkZISPa8D1F-B_tpcddlXQQ0sACKwtlCY_3qTgdRQ';
+
+
 const requestHandler = request => {
   return request;
 };
