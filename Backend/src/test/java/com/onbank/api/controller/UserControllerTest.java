@@ -54,16 +54,6 @@ public class UserControllerTest {
     }
 
     @Test
-    void shouldReturnOneUser() throws Exception {
-        User tmp = userRepository.saveAndFlush(createMockUser("99111100234"));
-
-        mockMvc.perform(get("/api/getProfileUser/" + tmp.getId())
-                .header("userID", "1"))
-                .andDo(print())
-                .andExpect(status().isOk());
-    }
-
-    @Test
     void shouldReturnNoUser() throws Exception {
         userRepository.deleteAll();
         mockMvc.perform(get("/api/getProfileUser/1")
