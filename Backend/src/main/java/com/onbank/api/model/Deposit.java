@@ -1,0 +1,38 @@
+package com.onbank.api.model;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "deposit")
+@EqualsAndHashCode(callSuper = false)
+public class Deposit  extends EntityCore  {
+    @Column(name = "depositBalance", nullable = false)
+    private BigDecimal depositBalance;
+    @Column(name = "returnBalance", nullable = false)
+    private BigDecimal returnBalance;
+    @Column(name = "depositInterest", nullable = false)
+    private BigDecimal depositInterest;
+    @OneToOne
+    @Column(name = "account", nullable = false)
+    private Account account;
+    @NotNull(message = "Date cannot be empty.")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDate;
+    @Column(name = "active", nullable = false)
+    private Boolean active;
+}

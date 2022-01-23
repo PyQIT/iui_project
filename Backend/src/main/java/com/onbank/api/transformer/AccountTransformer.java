@@ -12,9 +12,9 @@ public class AccountTransformer {
         return account;
     }
 
-    public static AccountDto convertToDto(Account user) {
+    public static AccountDto convertToDto(Account account) {
         AccountDto dto = new AccountDto();
-        BeanUtils.copyProperties(user, dto);
+        BeanUtils.copyProperties(account, dto);
         return dto;
     }
 }
