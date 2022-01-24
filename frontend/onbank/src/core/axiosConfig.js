@@ -15,8 +15,7 @@ const axiosInstanceJTB = axios.create({ baseURL: jakitobankURL });
 
 const requestHandler = request => {
   if (AuthUtil.isLoggedIn()) {
-    request.headers.Authorization = AuthUtil.getAuthToken();
-    console.log(request);
+    request.headers.Authorization = `Bearer ${  AuthUtil.getAuthToken()}`;
   }
   return request;
 };
