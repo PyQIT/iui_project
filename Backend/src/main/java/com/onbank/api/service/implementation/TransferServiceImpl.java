@@ -10,8 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -23,10 +23,16 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public List<Transfer> getTransfers() {
-        return transferRepository.getTransferByRealizationStateAndSenderAccountNumber(
-                TransferState.REALIZED,
+        List<Transfer> sent = transferRepository.getTransferByRealizationStateInAndSenderAccountNumber(
+                Collections.singletonList(TransferState.REALIZED),
                 authUser.getUser().getAccount().getNumber()
         );
+        List<Transfer> received = transferRepository.getTransferByRealizationStateInAndRecipientAccountNumber(
+                Collections.singletonList(TransferState.REALIZED),
+                authUser.getUser().getAccount().getNumber()
+        );
+        sent.addAll(received);
+        return sent;
     }
 
     @Override
