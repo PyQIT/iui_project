@@ -19,7 +19,8 @@
       {
         "extensions": [".js", ".jsx"]
       }
-    ]
+    ],
+    "object-shorthand": 1
   },
   "settings": {
     "import/resolver": {

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Auth from '../API/security/authentication'
 
 const baseURL = 'http://localhost:8080/api/';
 const jakitobankURL = 'http://www.jakitobank.pl/api/';
@@ -9,10 +10,13 @@ const axiosInstancePost = axios.create({ baseURL });
 
 const axiosInstanceJTB = axios.create({ baseURL: jakitobankURL });
 
-const accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTY0Mjk4MDM3OCwiaWF0IjoxNjQyOTYyMzc4fQ.Iobjm6pNpdufSb6nyIOeArqe_FOyW8NI6ohUdk6Ml2Gw8nkZISPa8D1F-B_tpcddlXQQ0sACKwtlCY_3qTgdRQ';
+// const accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTY0Mjk4MDM3OCwiaWF0IjoxNjQyOTYyMzc4fQ.Iobjm6pNpdufSb6nyIOeArqe_FOyW8NI6ohUdk6Ml2Gw8nkZISPa8D1F-B_tpcddlXQQ0sACKwtlCY_3qTgdRQ';
 
 
 const requestHandler = request => {
+  if (Auth.isLoggedIn()) {
+    request.headers.Authorization = Auth.getAuthToken();
+  }
   return request;
 };
 

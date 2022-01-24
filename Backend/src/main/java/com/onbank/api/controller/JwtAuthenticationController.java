@@ -4,6 +4,7 @@ import com.onbank.api.service.UserService;
 import com.onbank.api.model.JwtRequest;
 import com.onbank.api.model.JwtResponse;
 import com.onbank.config.security.JwtTokenUtil;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -30,10 +31,13 @@ public class JwtAuthenticationController {
     @RequestMapping(value = "/api/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
-        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        try {
+            authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        } catch (Exception e) {
+            return new ResponseEntity<>("Login failed", HttpStatus.UNAUTHORIZED);
+        }
 
-        final UserDetails userDetails = userService
-                .loadUserByUsername(authenticationRequest.getUsername());
+        final UserDetails userDetails = userService.loadUserByUsername(authenticationRequest.getUsername());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
