@@ -7,7 +7,6 @@ import PendingTransactions from 'pages/Transactions/TransactionsTable/PendingTra
 import NewTransfer from 'pages/NewTransfer/NewTransfer';
 import NewDeposit from "../pages/NewDeposit/NewDeposit";
 import Login from "../pages/User/Login";
-import Register from "../pages/User/Register";
 
 export const routes = [
   {
@@ -45,9 +44,5 @@ export const routes = [
   {
     path: paths.login,
     component: Login,
-  },
-  {
-    path: paths.register,
-    component: Register,
   },
 ];

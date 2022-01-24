@@ -31,7 +31,7 @@ const App = () => (
                       {routes.map(route => (
                         <RouteWithSubRoutes key={route.component} {...route} />
                       ))}
-                      <Redirect from={paths.home} to={paths.transactions} />
+                      <Redirect from={paths.home} to={paths.login} />
                     </Switch>
                   </Template>
                 );

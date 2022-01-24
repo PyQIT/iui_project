@@ -23,7 +23,8 @@ import { AccountCircle, SwapHoriz, ViewHeadline, ViewList, AccountBalanceWallet 
 import { paths } from 'routes/paths';
 import { useStyles } from 'themes/appBarTheme';
 import { getUserProfileAction } from 'actions/userProfileActions';
-import Login from '../pages/User/Login'
+import Login from '../pages/User/Login';
+import Logout from '../pages/User/Logout';
 
 const bookmarkArray = [
   { name: 'Transakcje', path: paths.transactions, icon: <ViewList /> },
@@ -158,7 +159,7 @@ const NavigationBar = ({ location, userProfile, getUserProfile }) => {
                 <div className={classes.insideDivPerson}>
                   <Typography>Imie: {userProfile.name}</Typography>
                   <Typography>Nazwisko: {userProfile.surname}</Typography>
-                  <Login/>
+                  <Logout/>
                 </div>
               </Paper>
             </Popover>

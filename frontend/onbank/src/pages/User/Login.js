@@ -1,11 +1,10 @@
 import React from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 // eslint-disable-next-line import/no-named-as-default
 import Auth from "../../API/security/authentication"
 import AuthUtil from "../../API/security/authenticationUtil"
 
 const Login = () => {
-
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -15,6 +14,8 @@ const Login = () => {
                 console.log('Login success');
             });
         }
+
+
     };
 
     return (
