@@ -9,6 +9,9 @@ import com.onbank.http.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -48,4 +51,14 @@ public class TransferServiceImpl implements TransferService {
         ).orElseThrow(() -> new TransferNotFoundException("Transfer id=" + id + " not found.")
         );
     }
+
+    @Override
+    public BigDecimal getLocksAmount() {
+        List<Transfer> transfers = transferRepository.findByRealizationStateAndDateBeforeAndSenderAccountNumber(TransferState.WAITING, LocalDate.now(), authUser.getUser().getAccount().getNumber());
+        return transfers.stream()
+                .map(Transfer::getAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+
 }

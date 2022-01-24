@@ -21,7 +21,7 @@ public interface TransferRepository extends JpaRepository<Transfer, Long> {
 
 
     List<Transfer> getTransferByRealizationStateAndSenderAccountNumber(TransferState transferState, String senderAccountNumber);
-//    List<Transfer> findByRealizationStateAndDateBeforeAndSenderAccountNumber(TransferState realizationState, LocalDate firstDate, String senderAccountNumber);
+    List<Transfer> findByRealizationStateAndDateBeforeAndSenderAccountNumber(TransferState realizationState, LocalDate firstDate, String senderAccountNumber);
     List<Transfer> getTransferByRealizationStateInAndSenderAccountNumber(List<TransferState> transferStates, String senderAccountNumber);
     Optional<Transfer> findByIdAndSenderAccountNumber(Long id, String senderAccountNumber);
 }
