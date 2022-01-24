@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,6 +57,12 @@ public class TransferController {
     @ResponseStatus(HttpStatus.OK)
     public TransferDetailsDto getTransfer(@PathVariable Long id){
         return TransferTransformer.convertToTransferDetailsDto(transferService.getTransfer(id));
+    }
+
+    @GetMapping("/getLocksAmount")
+    @ResponseStatus(HttpStatus.OK)
+    public BigDecimal getLocksAmount() {
+        return transferService.getLocksAmount();
     }
 }
 
