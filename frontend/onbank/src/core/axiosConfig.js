@@ -5,12 +5,10 @@ import AuthUtil from '../API/security/authenticationUtil'
 const baseURL = 'http://localhost:8080/api/';
 const jakitobankURL = 'http://www.jakitobank.pl/api/';
 
-const axiosInstanceGet = axios.create({ baseURL });
-const axiosInstancePost = axios.create({ baseURL });
+const axiosInstanceGet = axios.create({ baseURL: baseURL, method: "GET" });
+const axiosInstancePost = axios.create({ baseURL, method: "POST" });
 
-const axiosInstanceJTB = axios.create({ baseURL: jakitobankURL });
-
-// const accessToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTY0Mjk4MDM3OCwiaWF0IjoxNjQyOTYyMzc4fQ.Iobjm6pNpdufSb6nyIOeArqe_FOyW8NI6ohUdk6Ml2Gw8nkZISPa8D1F-B_tpcddlXQQ0sACKwtlCY_3qTgdRQ';
+const axiosInstanceJTB = axios.create({ baseURL: jakitobankURL, method: "GET" });
 
 
 const requestHandler = request => {

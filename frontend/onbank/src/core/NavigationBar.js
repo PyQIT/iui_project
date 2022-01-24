@@ -59,8 +59,8 @@ const NavigationBar = ({ location, userProfile, getUserProfile }) => {
     setAnchorEl(null);
   }
 
-  function handleClickUserID(id) {
-    getUserProfile(id);
+  function handleClickUserID() {
+    getUserProfile();
     setDisabledValue(!disabledValue);
     setDisabledValue2(!disabledValue2);
   }
@@ -176,8 +176,8 @@ const mapStateToProps = ({ userProfile }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUserProfile: userID => {
-      dispatch(getUserProfileAction(userID));
+    getUserProfile: () => {
+      dispatch(getUserProfileAction());
     },
   };
 };

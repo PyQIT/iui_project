@@ -1,11 +1,8 @@
 package com.onbank.api.controller;
 
 import com.onbank.api.dto.AccountDto;
-import com.onbank.api.model.Account;
-import com.onbank.api.model.Deposit;
 import com.onbank.api.service.AccountService;
 import com.onbank.api.transformer.AccountTransformer;
-import com.onbank.http.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -21,7 +18,6 @@ import java.math.BigDecimal;
 @Validated
 public class AccountController {
     private final AccountService accountService;
-    private final AuthUser authUser;
 
     @GetMapping("/number/{number}")
     @ResponseStatus(HttpStatus.OK)
@@ -36,7 +32,7 @@ public class AccountController {
     }
 
 
-    @PostMapping
+    @PostMapping("/create")
     @ResponseStatus(HttpStatus.OK)
     public void createAccount(@Valid @RequestBody AccountDto accountDto) {
         accountService.createAccount(AccountTransformer.convertToEntity(accountDto));

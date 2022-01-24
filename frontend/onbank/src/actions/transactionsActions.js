@@ -1,14 +1,16 @@
 import {
-  getLockedTransactionsApi,
-  getTransactionsApi,
   getDetailsTransactionApi,
-  sendTransactionsApi,
+  getLockedTransactionsApi,
+  getLocksAmountApi,
+  getTransactionsApi,
+  sendTransactionsApi
 } from 'API/transactionsAPI';
 import DateFormat from 'utils/DateFormat';
 
 export const FETCH_TRANSACTION_LIST_SUCCESS = 'FETCH_TRANSACTION_LIST_SUCCESS';
 export const FETCH_DETAILS_TRANSACTION_SUCCESS = 'FETCH_DETAILS_TRANSACTION_SUCCESS';
 export const FETCH_LOCKED_TRANSACTION_SUCCESS = 'FETCH_LOCKED_TRANSACTION_SUCCESS';
+export const FETCH_LOCKS_AMOUNT_SUCCESS = 'FETCH_LOCKS_AMOUNT_SUCCESS';
 export const NEW_TRANSFER_REQUEST = 'NEW_TRANSFER_REQUEST';
 export const NEW_TRANSFER_SUCCESS = 'NEW_TRANSFER_SUCCESS';
 export const NEW_TRANSFER_FAILURE = 'NEW_TRANSFER_FAILURE';
@@ -50,16 +52,24 @@ export const sendTransactionsAction = data => dispatch => {
     amount: parseFloat(data.ammount),
   };
 
-  dispatch({ type: NEW_TRANSFER_REQUEST });
+  dispatch({type: NEW_TRANSFER_REQUEST});
   return sendTransactionsApi(json)
-    .then(() => {
-      dispatch({ type: NEW_TRANSFER_SUCCESS });
-    })
-    .catch(() => {
-      dispatch({ type: NEW_TRANSFER_FAILURE });
-    });
+      .then(() => {
+        dispatch({type: NEW_TRANSFER_SUCCESS});
+      })
+      .catch(() => {
+        dispatch({type: NEW_TRANSFER_FAILURE});
+      });
+};
+
+export const getLocksAmount = () => dispatch => {
+  return getLocksAmountApi()
+      .then(response => {
+        dispatch({type: FETCH_LOCKS_AMOUNT_SUCCESS, payload: {data: response.data}});
+      })
+      .catch(err => console.log(err));
 };
 
 export const setIsSuccessAction = status => dispatch => {
-  dispatch({ type: SET_IS_SUCCESS, payload: { status } });
+  dispatch({type: SET_IS_SUCCESS, payload: {status}});
 };
