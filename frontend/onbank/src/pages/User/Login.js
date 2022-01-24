@@ -17,10 +17,6 @@ const Login = () => {
     return (
         <div className="text-center">
             <form className="form-signin" onSubmit={onSubmit}>
-                <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <label htmlFor="inputUsername" className="sr-only">
-                    Login
-                </label>
                 <input
                     type="text"
                     id="inputUsername"
@@ -28,9 +24,6 @@ const Login = () => {
                     placeholder="Login"
                     required
                 />
-                <label htmlFor="inputPassword" className="sr-only">
-                    Password
-                </label>
                 <input
                     type="password"
                     id="inputPassword"

@@ -1,25 +1,24 @@
-import { toast } from 'react-toastify';
-// eslint-disable-next-line import/no-cycle
+import {toast} from 'react-toastify';
 import {authenticationRequest} from "../authenticationAPI";
 
-export class Auth {
+class Auth {
 
     login(username, password) {
         if (!this.isLoggedIn()) {
-            authenticationRequest(username, password)
+            return authenticationRequest(username, password)
                 .then(response => {
-                    if(response.status === 200) {
+                    if (response.status === 200) {
                         localStorage.setItem('jwttoken', JSON.stringify(response.data.jwttoken));
                     }
                 }).catch(err => {
                     if (err.request.response.status === 401) {
                         toast.error('Niepoprawne dane logowania');
-                    }
-                    else {
+                    } else {
                         toast.error('Wystąpił nieznany błąd');
                     }
             });
         }
+        return undefined;
     }
 
     isLoggedIn() {
