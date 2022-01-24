@@ -1,0 +1,62 @@
+.container{
+    display: flex;
+}
+
+form.form-signin {
+    box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+    0px 4px 5px 0px rgb(0 0 0 / 14%),
+    0px 1px 10px 0px rgb(0 0 0 / 12%);
+    margin: auto;
+    padding: 50px 100px 50px 100px;
+    text-align: center;
+    margin-top: 100px;
+    background-color: #fff;
+}
+
+
+.on {
+    display: inline-flex;
+    color: #27AE60;
+    font-weight: 600;
+    padding-bottom: 25px;
+}
+
+.title {
+    display: inline-flex;
+    font-weight: 600;
+    padding-bottom: 25px;
+}
+
+input#inputUsername {
+    padding: 10px;
+    text-align: center;
+}
+
+input#inputPassword {
+    padding: 10px;
+    text-align: center;
+}
+
+button.btn.btn-lg.btn-primary.btn-block {
+    display:inline-block;
+    padding:0.2em 1.45em;
+    margin:0.1em;
+    border:0.15em solid #CCCCCC;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Segoe UI','Roboto',sans-serif;
+    font-weight:400;
+    color:#000000;
+    background-color:#CCCCCC;
+    text-align:center;
+    position:relative;
+    width: 75%;
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+button.btn.btn-lg.btn-primary.btn-block:hover{
+    border-color:#7a7a7a;
+}
+button.btn.btn-lg.btn-primary.btn-block:active{
+    background-color:#999999;
+}
