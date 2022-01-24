@@ -1,5 +1,6 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
+import '../../themes/logout.css';
 // eslint-disable-next-line import/no-named-as-default
 import Auth from "../../API/security/authentication"
 import AuthUtil from "../../API/security/authenticationUtil"
@@ -21,8 +22,8 @@ const Logout = () => {
 
     return (
         <div className="text-center">
-                <form className="form-signin" onSubmit={onSubmitLogout}>
-                    <button className="btn btn-lg btn-primary btn-block" type="submit">
+                <form onSubmit={onSubmitLogout}>
+                    <button className="logoutButton" type="submit">
                         Wyloguj sie
                     </button>
                 </form>
