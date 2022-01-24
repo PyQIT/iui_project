@@ -1,8 +1,10 @@
 import React from "react";
 import {Link, useHistory} from "react-router-dom";
+import '../../themes/login.css';
 // eslint-disable-next-line import/no-named-as-default
 import Auth from "../../API/security/authentication"
 import AuthUtil from "../../API/security/authenticationUtil"
+import {Typography} from "@material-ui/core";
 
 const Login = () => {
 
@@ -22,8 +24,16 @@ const Login = () => {
     };
 
     return (
-        <div className="text-center">
+        <div className="container">
             <form className="form-signin" onSubmit={onSubmit}>
+                <Typography variant="h6" className="on">
+                    ON
+                </Typography>
+                <Typography variant="h6" className="title">
+                    BANK
+                </Typography>
+                <h3>Logowanie</h3>
+                <p>
                 <input
                     type="text"
                     id="inputUsername"
@@ -31,6 +41,8 @@ const Login = () => {
                     placeholder="Login"
                     required
                 />
+                </p>
+                <p>
                 <input
                     type="password"
                     id="inputPassword"
@@ -38,6 +50,7 @@ const Login = () => {
                     placeholder="Haslo"
                     required
                 />
+                    </p>
                 <button className="btn btn-lg btn-primary btn-block" type="submit">
                     Zaloguj się
                 </button>
