@@ -14,8 +14,9 @@ export const newTransferSchema = setBankName => {
       .test('accountValidate', 'Błędny numer ', value => {
         if (patt.test(value)) {
           const returnValue = getIBANDataApi(value).then(({ data }) => {
-            if (data.suma_poprawna !== '0') {
-              setBankName(data.nazwa_banku);
+            console.log(data);
+            if (data.result === 200) {
+              setBankName(data.data.bank.bank_name);
               return true;
             }
             return false;
