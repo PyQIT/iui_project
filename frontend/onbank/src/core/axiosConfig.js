@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import Auth from '../API/security/authentication'
+import AuthUtil from '../API/security/authenticationUtil'
 
 const baseURL = 'http://localhost:8080/api/';
 const jakitobankURL = 'http://www.jakitobank.pl/api/';
@@ -14,8 +14,9 @@ const axiosInstanceJTB = axios.create({ baseURL: jakitobankURL });
 
 
 const requestHandler = request => {
-  if (Auth.isLoggedIn()) {
-    request.headers.Authorization = Auth.getAuthToken();
+  if (AuthUtil.isLoggedIn()) {
+    request.headers.Authorization = AuthUtil.getAuthToken();
+    console.log(request);
   }
   return request;
 };

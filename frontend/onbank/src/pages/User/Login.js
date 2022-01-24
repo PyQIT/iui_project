@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
 // eslint-disable-next-line import/no-named-as-default
 import Auth from "../../API/security/authentication"
+import AuthUtil from "../../API/security/authenticationUtil"
 
 const Login = () => {
 
@@ -9,9 +10,13 @@ const Login = () => {
     const onSubmit = (event) => {
         event.preventDefault();
 
-        const [username, password] = event.target.elements;
+        // const [username, password] = event.target.elements;
 
-        Auth.login(username, password);
+        if (!AuthUtil.isLoggedIn()) {
+            Auth.login('user1', 'pass1').then(() => {
+                console.log('Login success');
+            });
+        }
     };
 
     return (
