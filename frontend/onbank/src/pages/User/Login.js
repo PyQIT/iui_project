@@ -10,10 +10,8 @@ const Login = () => {
     const onSubmit = (event) => {
         event.preventDefault();
 
-        // const [username, password] = event.target.elements;
-
         if (!AuthUtil.isLoggedIn()) {
-            Auth.login('user1', 'pass1').then(() => {
+            Auth.login(event.target[0].value, event.target[1].value).then(() => {
                 console.log('Login success');
             });
         }

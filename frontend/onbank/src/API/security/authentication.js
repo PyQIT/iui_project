@@ -5,8 +5,6 @@ import AuthUtil from "./authenticationUtil";
 class Auth {
 
     login(username, password) {
-        console.log(username);
-        console.log(password);
         if (!AuthUtil.isLoggedIn()) {
             return authenticationRequest(username, password)
                 .then(response => {
@@ -24,6 +22,12 @@ class Auth {
             });
         }
         return undefined;
+    }
+
+    logout() {
+        if (AuthUtil.isLoggedIn()){
+            localStorage.removeItem('jwttoken');
+        }
     }
 }
 
