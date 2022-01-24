@@ -1,6 +1,8 @@
 package com.onbank.api.controller;
 
 import com.onbank.api.dto.AccountDto;
+import com.onbank.api.model.Account;
+import com.onbank.api.model.Deposit;
 import com.onbank.api.service.AccountService;
 import com.onbank.api.transformer.AccountTransformer;
 import com.onbank.http.AuthUser;
@@ -10,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 
 @CrossOrigin
 @RestController
@@ -53,6 +56,12 @@ public class AccountController {
     @ResponseStatus(HttpStatus.OK)
     public AccountDto getAccount() {
         return AccountTransformer.convertToDto(accountService.getAccount());
+    }
+
+    @GetMapping("/balance")
+    @ResponseStatus(HttpStatus.OK)
+    public BigDecimal getBalance(){
+        return accountService.getAccount().getAccountBalance();
     }
 
 }
