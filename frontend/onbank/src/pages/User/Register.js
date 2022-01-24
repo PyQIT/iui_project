@@ -3,33 +3,15 @@ import { Link, useHistory, Redirect } from "react-router-dom";
 
 
 const Register = () => {
-    const client = useClient();
-    const history = useHistory();
-    const { customer, setCustomer } = useCustomer();
+
 
     const onSubmit = (event) => {
         event.preventDefault();
 
         const [username, password] = event.target.elements;
 
-        client
-            .request(register, {
-                username: username.value,
-                password: password.value,
-            })
-            .then(({ register_customer: { customer, token } }) => {
-                client.setHeader("authorization", `Bearer ${token}`);
-
-                setCustomer(customer);
-
-                history.push("/");
-            })
-            .catch(console.log);
     };
 
-    if (customer) {
-        return <Redirect to="/" />;
-    }
 
     return (
         <form onSubmit={onSubmit} className="form-signin">

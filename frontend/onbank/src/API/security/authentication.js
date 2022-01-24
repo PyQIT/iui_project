@@ -1,7 +1,8 @@
 import { toast } from 'react-toastify';
+// eslint-disable-next-line import/no-cycle
 import {authenticationRequest} from "../authenticationAPI";
 
-class Auth {
+export class Auth {
 
     login(username, password) {
         if (!this.isLoggedIn()) {

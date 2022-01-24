@@ -1,36 +1,18 @@
 import React from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
-
-import { useCustomer, useClient } from "../../store";
+// eslint-disable-next-line import/no-named-as-default
+import Auth from "../../API/security/authentication"
 
 const Login = () => {
-    const client = useClient();
-    const history = useHistory();
-    const { customer, setCustomer } = useCustomer();
+
 
     const onSubmit = (event) => {
         event.preventDefault();
 
         const [username, password] = event.target.elements;
 
-        client
-            .request(login, {
-                username: username.value,
-                password: password.value,
-            })
-            .then(({ login_customer: { customer, token } }) => {
-                client.setHeader("authorization", `Bearer ${token}`);
-
-                setCustomer(customer);
-
-                history.push("/");
-            })
-            .catch(console.log);
+        Auth.login(username, password);
     };
-
-    if (customer) {
-        return <Redirect to="/" />;
-    }
 
     return (
         <div className="text-center">

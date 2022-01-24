@@ -23,6 +23,7 @@ import { AccountCircle, SwapHoriz, ViewHeadline, ViewList, AccountBalanceWallet 
 import { paths } from 'routes/paths';
 import { useStyles } from 'themes/appBarTheme';
 import { getUserProfileAction } from 'actions/userProfileActions';
+import Login from '../pages/User/Login'
 
 const bookmarkArray = [
   { name: 'Transakcje', path: paths.transactions, icon: <ViewList /> },
@@ -157,14 +158,7 @@ const NavigationBar = ({ location, userProfile, getUserProfile }) => {
                 <div className={classes.insideDivPerson}>
                   <Typography>Imie: {userProfile.name}</Typography>
                   <Typography>Nazwisko: {userProfile.surname}</Typography>
-                  <ButtonGroup variant="contained" color="default" size="large">
-                    <Button onClick={() => handleClickUserID(1)} disabled={disabledValue}>
-                      User 1
-                    </Button>
-                    <Button onClick={() => handleClickUserID(2)} disabled={disabledValue2}>
-                      User 2
-                    </Button>
-                  </ButtonGroup>
+                  <Login/>
                 </div>
               </Paper>
             </Popover>
