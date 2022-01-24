@@ -5,7 +5,10 @@ import com.onbank.api.service.UserService;
 import com.onbank.api.transformer.UserTransformer;
 import com.onbank.http.AuthUser;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Role;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -17,6 +20,7 @@ public class UserController {
     private final UserService userService;
     private final AuthUser authUser;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public UserDto getUser(@PathVariable Long id){

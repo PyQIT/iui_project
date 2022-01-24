@@ -60,7 +60,10 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public BigDecimal getLocksAmount() {
-        List<Transfer> transfers = transferRepository.findByRealizationStateAndDateBeforeAndSenderAccountNumber(TransferState.WAITING, LocalDate.now(), authUser.getUser().getAccount().getNumber());
+        List<Transfer> transfers = transferRepository.findByRealizationStateAndDateBeforeAndSenderAccountNumber(
+                TransferState.WAITING, LocalDate.now(),
+                authUser.getUser().getAccount().getNumber()
+        );
         return transfers.stream()
                 .map(Transfer::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
