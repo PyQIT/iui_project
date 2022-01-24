@@ -3,12 +3,12 @@ import { toast } from 'react-toastify';
 import AuthUtil from '../API/security/authenticationUtil'
 
 const baseURL = 'http://localhost:8080/api/';
-const jakitobankURL = 'http://www.jakitobank.pl/api/';
+const jakitobankURL = 'https://api.ibanapi.com/v1/validate/';
 
 const axiosInstanceGet = axios.create({ baseURL: baseURL, method: "GET" });
 const axiosInstancePost = axios.create({ baseURL, method: "POST" });
 
-const axiosInstanceJTB = axios.create({ baseURL: jakitobankURL, method: "GET" });
+const axiosInstanceJTB = axios.create({ baseURL: jakitobankURL, method: "POST"});
 
 
 const requestHandler = request => {
