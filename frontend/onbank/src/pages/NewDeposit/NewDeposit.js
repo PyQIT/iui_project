@@ -60,6 +60,14 @@ const NewDeposit = ({ sendTransactions, isLoading, isSuccess, setIsSuccess }) =>
                                             xmin={0}
                                             xmax={10000}
                                             onChange={({ x }) => setState(state => ({ ...state, x }))}
+                                                styles={{
+                                                    active: {
+                                                        backgroundColor: '#27AE60'
+                                                    },
+                                                    disabled: {
+                                                        opacity: 0.5
+                                                    }
+                                                }}
                                         />
                                         <h3><center>Kwota: {state.x}</center></h3>
 
