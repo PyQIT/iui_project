@@ -54,9 +54,6 @@ const Login = () => {
                 <button className="btn btn-lg btn-primary btn-block" type="submit">
                     Zaloguj się
                 </button>
-                <p className="mt-3 mb-3 text-muted text-center">
-                    Brak konta? <Link to="/auth/register">Stwórz nowe konto</Link>
-                </p>
             </form>
         </div>
     );
