@@ -1,10 +1,10 @@
 import React from "react";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import '../../themes/login.css';
 // eslint-disable-next-line import/no-named-as-default
+import {Typography} from "@material-ui/core";
 import Auth from "../../API/security/authentication";
 import AuthUtil from "../../API/security/authenticationUtil";
-import {Typography} from "@material-ui/core";
 
 const Login = () => {
 
