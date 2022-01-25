@@ -1,10 +1,10 @@
 import React from "react";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import '../../themes/login.css';
 // eslint-disable-next-line import/no-named-as-default
-import Auth from "../../API/security/authentication"
-import AuthUtil from "../../API/security/authenticationUtil"
 import {Typography} from "@material-ui/core";
+import Auth from "../../API/security/authentication";
+import AuthUtil from "../../API/security/authenticationUtil";
 
 const Login = () => {
 
@@ -13,7 +13,7 @@ const Login = () => {
     const onSubmit = (event) => {
         event.preventDefault();
 
-        if (!AuthUtil.isLoggedIn()) {
+        if (AuthUtil.isLoggedIn()) {
             Auth.login(event.target[0].value, event.target[1].value).then(() => {
                 console.log('Login success');
                 history.push("/transactions/completed-transactions");

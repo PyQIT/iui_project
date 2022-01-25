@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect, Switch, BrowserRouter} from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -13,6 +13,8 @@ import { paths } from 'routes/paths';
 import RouteWithSubRoutes from 'routes/RouteWithSubRoutes';
 import customTheme from 'themes/customTheme';
 import Template from 'core/Template/Template';
+import Login from "./pages/User/Login";
+
 
 const App = () => (
   <Provider store={store}>
@@ -31,7 +33,7 @@ const App = () => (
                       {routes.map(route => (
                         <RouteWithSubRoutes key={route.component} {...route} />
                       ))}
-                      <Redirect from={paths.home} to={paths.login} />
+                        <Redirect from={paths.home} to={paths.login} />
                     </Switch>
                   </Template>
                 );
