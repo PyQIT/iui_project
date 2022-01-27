@@ -51,7 +51,9 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public Transfer getTransfer(Long id) {
-        return transferRepository.findByIdAndSenderAccountNumber(
+        return transferRepository.findByIdAndSenderAccountNumberOrIdAndRecipientAccountNumber(
+                id,
+                authUser.getUser().getAccount().getNumber(),
                 id,
                 authUser.getUser().getAccount().getNumber()
         ).orElseThrow(() -> new TransferNotFoundException("Transfer id=" + id + " not found.")
