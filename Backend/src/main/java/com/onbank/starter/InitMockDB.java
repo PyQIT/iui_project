@@ -22,13 +22,13 @@ import java.util.List;
 @Component
 public class InitMockDB {
 
-    private static final String ACCOUNT_NAME_1 = "Mariusz Kowalski";
+    private static final String ACCOUNT_NAME_2 = "Mariusz Kowalski";
     @Getter
-    private static final String ACCOUNT_NUMBER_1 = "PL13114000000787349936948743";
+    private static final String ACCOUNT_NUMBER_2 = "PL13114000000787349936948743";
 
-    private static final String ACCOUNT_NAME_2 = "Łukasz Nowak";
+    private static final String ACCOUNT_NAME_1 = "Łukasz Nowak";
     @Getter
-    private static final String ACCOUNT_NUMBER_2 = "PL48105000021021290496211203";
+    private static final String ACCOUNT_NUMBER_1 = "PL48105000021021290496211203";
 
     private final TransferRepository transferRepository;
     private final UserRepository userRepository;
