@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface DepositRepository extends JpaRepository<Deposit, Long> {
 
     Optional<Deposit> getDepositByAccount(Account account);
+    Optional<Deposit> findDepositByAccountAndActive(Account account, Boolean active);
 }
