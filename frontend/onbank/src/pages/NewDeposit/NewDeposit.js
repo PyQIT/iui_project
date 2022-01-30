@@ -103,6 +103,8 @@ const NewDeposit = ({ createDeposit, isLoading, isSuccess, setIsSuccess }) => {
                         </Form>
                     )}
                 </Formik>
+
+                <div className={classes.result}><p>test</p></div>
             </Paper>
         );
 };
