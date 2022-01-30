@@ -1,53 +1,55 @@
 import React, {useState} from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { Formik, Form } from 'formik';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
+import {Form, Formik} from 'formik';
 import PermContactCalendar from '@material-ui/icons/PermContactCalendar';
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import { DatePicker } from '@material-ui/pickers';
+import {MuiThemeProvider} from '@material-ui/core/styles';
+import {DatePicker} from '@material-ui/pickers';
 import {
-  Button,
-  CircularProgress,
-  FormLabel,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  Input,
-  InputLabel,
-  InputAdornment,
-  Paper,
-  Radio,
-  RadioGroup,
+    Button,
+    CircularProgress,
+    FormControl,
+    FormControlLabel,
+    FormHelperText,
+    FormLabel,
+    Input,
+    InputAdornment,
+    InputLabel,
+    Paper,
+    Radio,
+    RadioGroup,
 } from '@material-ui/core';
-import { paths } from 'routes/paths';
-import { sendTransactionsAction, setIsSuccessAction } from 'actions/transactionsActions';
-import { useStyles } from 'themes/newTransferTheme';
-import { colorthemeButtonAndDate } from 'themes/customTheme';
+import {paths} from 'routes/paths';
+import {sendTransactionsAction, setIsSuccessAction} from 'actions/transactionsActions';
+import {useStyles} from 'themes/newTransferTheme';
+import {colorthemeButtonAndDate} from 'themes/customTheme';
 import AccountNumberMask from './accountNumberMask';
-import { newTransferSchema } from './newTransferSchema';
+import {newTransferSchema} from './newTransferSchema';
 import NumberFormatCustom from './numberFormatCustom';
+import {getUserProfileAction} from "../../actions/userProfileActions";
 
-const NewTransfer = ({ sendTransactions, isLoading, isSuccess, setIsSuccess }) => {
-  const classes = useStyles();
-  const [bankName, setBankName] = useState(null);
+const NewTransfer = ({sendTransactions, isLoading, isSuccess, setIsSuccess, getUserProfile}) => {
+    const classes = useStyles();
+    const [bankName, setBankName] = useState(null);
 
-  return (
-    <Paper className={classes.root}>
-      <Formik
-        initialValues={{
-          receiver: '',
-          accountNumber: '',
-          description: '',
-          ammount: '',
-          date: new Date(),
-          typeTransfer: 'NORMAL',
-          saveReceiver: false,
+    return (
+        <Paper className={classes.root}>
+            <Formik
+                initialValues={{
+                    receiver: '',
+                    accountNumber: '',
+                    description: '',
+                    ammount: '',
+                    date: new Date(),
+                    typeTransfer: 'NORMAL',
+                    saveReceiver: false,
         }}
         validationSchema={() => newTransferSchema(setBankName)}
         validateOnBlur
         validateOnChange
         onSubmit={values => {
-          sendTransactions(values);
+            sendTransactions(values);
+            getUserProfile();
         }}
       >
         {({ errors, touched, handleChange, handleBlur, values }) => (
@@ -232,12 +234,15 @@ const mapStateToProps = ({ transactions }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    sendTransactions: values => {
-      dispatch(sendTransactionsAction(values));
-    },
-    setIsSuccess: status => {
-      dispatch(setIsSuccessAction(status));
-    },
+      sendTransactions: values => {
+          dispatch(sendTransactionsAction(values));
+      },
+      setIsSuccess: status => {
+          dispatch(setIsSuccessAction(status));
+      },
+      getUserProfile: () => {
+          dispatch(getUserProfileAction());
+      },
   };
 };
 

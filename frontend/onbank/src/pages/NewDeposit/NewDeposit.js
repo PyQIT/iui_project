@@ -17,9 +17,10 @@ import { colorthemeButtonAndDate } from 'themes/customTheme';
 import Slider from 'react-input-slider';
 import 'react-input-range/lib/css/index.css';
 import {createDepositAction} from "../../actions/depositActions";
+import {getUserProfileAction} from "../../actions/userProfileActions";
 
 
-const NewDeposit = ({ createDeposit, isLoading, isSuccess, setIsSuccess }) => {
+const NewDeposit = ({ createDeposit, isLoading, isSuccess, setIsSuccess, getUserProfile }) => {
     const classes = useStyles();
     const [state, setState] = useState({ x: 10, wynik: 16});
 
@@ -35,6 +36,7 @@ const NewDeposit = ({ createDeposit, isLoading, isSuccess, setIsSuccess }) => {
                             depositAmount: state.x.toFixed(2),
                             expectedReturn: state.wynik.toFixed(2)
                         });
+                        getUserProfile();
                     }}
                 >
                     {({errors, touched, values}) => (
@@ -121,6 +123,9 @@ const mapDispatchToProps = dispatch => {
     return {
         createDeposit: values => {
             dispatch(createDepositAction(values));
+        },
+        getUserProfile: () => {
+            dispatch(getUserProfileAction());
         },
     };
 };
