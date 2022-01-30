@@ -35,7 +35,7 @@ export const useStyles = makeStyles(theme => ({
       height:150
     },
     insideDivPerson:{
-      paddingTop:20,
+      paddingTop:35,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',

@@ -1,18 +1,20 @@
 button.logoutButton {
-    display:inline-block;
-    padding:0.2em 1.45em;
-    margin:0.1em;
-    border:0.15em solid #CCCCCC;
-    box-sizing: border-box;
-    text-decoration:none;
-    font-family:'Segoe UI','Roboto',sans-serif;
-    font-weight:400;
-    color:#000000;
-    background-color:#CCCCCC;
-    text-align:center;
-    position:relative;
+    display: inline-block;
+    border: 0.15em solid #CCCCCC;
     margin-bottom: 25px;
     margin-top: 25px;
+    color: #fff;
+    background-color: #27AE60;
+    padding: 6px 16px;
+    min-width: 64px;
+    box-sizing: border-box;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    line-height: 1.75;
+    border-radius: 4px;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
 }
 button.logoutButton:hover{
     border-color:#7a7a7a;
