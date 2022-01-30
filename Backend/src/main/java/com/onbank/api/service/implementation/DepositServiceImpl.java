@@ -27,7 +27,7 @@ public class DepositServiceImpl implements DepositService {
         account.setAccountBalance(account.getAccountBalance().subtract(deposit.getDepositBalance()));
         accountRepository.save(account);
 
-        deposit.setDepositInterest(new BigDecimal("1.03"));
+        deposit.setDepositInterest(new BigDecimal("1.06"));
         deposit.setReturnBalance(deposit.getDepositBalance().multiply(deposit.getDepositInterest()));
 
         return depositRepository.save(deposit);

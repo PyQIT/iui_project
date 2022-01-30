@@ -2,7 +2,7 @@ const transactions = {
   mockAccountBar: {
     name: 'Konto studenckie',
     accountNumber: 'PL00000000000000000000000000',
-    blockedFunds: -100,
+    blockedFunds: -1150,
     availableFunds: 1000,
   },
   mockTransactionList: [

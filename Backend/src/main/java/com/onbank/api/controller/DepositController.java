@@ -52,11 +52,6 @@ public class DepositController {
         return depositService.getDeposit(userService.getUser(userId).getId()).getDepositBalance();
     }
 
-
-
-
-
-
     @GetMapping("/balance")
     @ResponseStatus(HttpStatus.OK)
     public BigDecimal getBalance(){
