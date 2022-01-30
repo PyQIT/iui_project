@@ -44,13 +44,8 @@ public class TransferController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public void createTransfer(@Valid @RequestBody CreateTransferDto transferDto) {
-        //TODO: Potrzebna walidacja!!!!!! Dane wysyłającego powinny weryfikowane lub uzupełniane automatycznie
-
-        Transfer tmpTransfer = TransferTransformer.convertToEntity(transferDto);
-
-        tmpTransfer.setRealizationState(TransferState.WAITING);
-        transferService.createTransfer(tmpTransfer);
+    public void createTransfer(@RequestBody CreateTransferDto createTransferDto) throws Exception {
+        transferService.createTransfer(createTransferDto);
     }
 
     @GetMapping("/{id}")

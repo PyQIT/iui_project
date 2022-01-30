@@ -1,5 +1,6 @@
 package com.onbank.api.service;
 
+import com.onbank.api.dto.CreateTransferDto;
 import com.onbank.api.model.Transfer;
 
 import java.math.BigDecimal;
@@ -9,7 +10,7 @@ public interface TransferService {
 
     List<Transfer> getTransfers();
     List<Transfer> getLockedTransactions();
-    Transfer createTransfer(Transfer transfer);
+    Transfer createTransfer(CreateTransferDto createTransferDto) throws Exception;
     Transfer getTransfer(Long id);
     BigDecimal getLocksAmount();
 }

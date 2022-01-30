@@ -15,7 +15,6 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "transfer")
@@ -67,4 +66,7 @@ public class Transfer extends EntityCore{
     @AccountNumber(message = "Invalid account number.")
     private String senderAccountNumber;
 
+    public Transfer() {
+        this.realizationState = TransferState.WAITING;
+    }
 }

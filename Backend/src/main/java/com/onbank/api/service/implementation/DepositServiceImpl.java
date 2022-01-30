@@ -27,13 +27,18 @@ public class DepositServiceImpl implements DepositService {
     public void createDeposit(CreateDepositDto createDepositDto) throws Exception {
         User user = authUser.getUser();
         Account account = user.getAccount();
+        if (depositRepository.getDepositByAccount(account).orElse(null) != null) {
+            throw new Exception("Nie można stworzyć kolejnej lokaty");
+        }
         BigDecimal depositAmount = createDepositDto.getDepositAmount();
         BigDecimal expectedReturn = createDepositDto.getExpectedReturn();
 
         Deposit deposit = new Deposit();
         deposit.setAccount(account);
         deposit.setReturnBalance(depositAmount.multiply(deposit.getDepositInterest()));
-        if (!deposit.getReturnBalance().equals(expectedReturn)) {
+        if (deposit.getReturnBalance().compareTo(expectedReturn) != 0) {
+            System.out.println(deposit.getReturnBalance() + " != " + expectedReturn);
+            System.out.println(deposit.getReturnBalance().compareTo(expectedReturn));
             throw new Exception("Niepoprawna kwota zwrotu");
         }
         deposit.setDepositBalance(depositAmount);

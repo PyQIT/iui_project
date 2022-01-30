@@ -33,7 +33,7 @@ const NewDeposit = ({ createDeposit, isLoading, isSuccess, setIsSuccess }) => {
                     onSubmit={() => {
                         createDeposit({
                             depositAmount: state.x.toFixed(2),
-                            expectedReturn: state.wynik
+                            expectedReturn: state.wynik.toFixed(2)
                         });
                     }}
                 >
