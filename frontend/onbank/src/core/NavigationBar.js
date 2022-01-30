@@ -76,6 +76,7 @@ const NavigationBar = ({ location, userProfile, getUserProfile }) => {
     >
       <List>
         <ListItemText>
+
           <Typography variant="h6" className={classes.burgerTitleOn}>
             ON
           </Typography>
