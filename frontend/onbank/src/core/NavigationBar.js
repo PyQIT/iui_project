@@ -40,7 +40,7 @@ const NavigationBar = ({ location, userProfile, getUserProfile }) => {
   const [disabledValue, setDisabledValue] = React.useState(true);
   const [disabledValue2, setDisabledValue2] = React.useState(false);
 
-  useEffect(() => getUserProfile(userProfile.userID), [getUserProfile, userProfile.userID]);
+  useEffect(() => getUserProfile(), [getUserProfile]);
 
   const toggleDrawer = (side, open) => event => {
     if (event.type === 'keydown') {
@@ -49,18 +49,19 @@ const NavigationBar = ({ location, userProfile, getUserProfile }) => {
     setState({ ...state, [side]: open });
   };
 
+  // eslint-disable-next-line
+  function handleClickUserID() {
+    getUserProfile();
+    setDisabledValue(!disabledValue);
+    setDisabledValue2(!disabledValue2);
+  }
+
   function handleClick(event) {
     setAnchorEl(event.currentTarget);
   }
 
   function handleClose() {
     setAnchorEl(null);
-  }
-
-  function handleClickUserID() {
-    getUserProfile();
-    setDisabledValue(!disabledValue);
-    setDisabledValue2(!disabledValue2);
   }
 
   const open = Boolean(anchorEl);
@@ -155,8 +156,7 @@ const NavigationBar = ({ location, userProfile, getUserProfile }) => {
             >
               <Paper className={classes.personPaper}>
                 <div className={classes.insideDivPerson}>
-                  <Typography>Imie: {userProfile.name}</Typography>
-                  <Typography>Nazwisko: {userProfile.surname}</Typography>
+                  <Typography>Witaj, {userProfile.name} {userProfile.surname}</Typography>
                   <Logout/>
                 </div>
               </Paper>

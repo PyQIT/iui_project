@@ -1,4 +1,4 @@
-import { paths } from 'routes/paths';
+import {paths} from 'routes/paths';
 import Transactions from 'pages/Transactions/Transactions';
 import TransactionDetails from 'pages/Transactions/TransactionDetails/TransactionDetails';
 import TransactionTable from 'pages/Transactions/TransactionsTable/TransactionsTable';
@@ -6,7 +6,6 @@ import CompletedTransactions from 'pages/Transactions/TransactionsTable/Complite
 import PendingTransactions from 'pages/Transactions/TransactionsTable/PendingTransactions/PendingTransactions';
 import NewTransfer from 'pages/NewTransfer/NewTransfer';
 import NewDeposit from "../pages/NewDeposit/NewDeposit";
-import Login from "../pages/User/Login";
 
 export const routes = [
   {
@@ -41,8 +40,4 @@ export const routes = [
     path: paths.newDeposit,
     component: NewDeposit,
   },
-/*  {
-    path: paths.login,
-    component: Login,
-  },*/
 ];

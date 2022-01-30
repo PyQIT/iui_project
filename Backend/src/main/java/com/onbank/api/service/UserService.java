@@ -1,5 +1,6 @@
 package com.onbank.api.service;
 
+import com.onbank.api.dto.UserDetailedDto;
 import com.onbank.api.dto.UserRegistrationDto;
 import com.onbank.api.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;

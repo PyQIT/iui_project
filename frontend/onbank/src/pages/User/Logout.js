@@ -15,7 +15,7 @@ const Logout = () => {
 
         if (AuthUtil.isLoggedIn()) {
             Auth.logout();
-            console.log("Wylogano");
+            console.log("Wylogowano");
             history.push("/login");
         }
     };
@@ -24,7 +24,7 @@ const Logout = () => {
         <div className="text-center">
                 <form onSubmit={onSubmitLogout}>
                     <button className="logoutButton" type="submit">
-                        Wyloguj sie
+                        Wyloguj się
                     </button>
                 </form>
         </div>

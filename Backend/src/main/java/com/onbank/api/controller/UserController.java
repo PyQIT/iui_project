@@ -1,6 +1,8 @@
 package com.onbank.api.controller;
 
+import com.onbank.api.dto.UserDetailedDto;
 import com.onbank.api.dto.UserDto;
+import com.onbank.api.service.UserDetailedService;
 import com.onbank.api.service.UserService;
 import com.onbank.api.transformer.UserTransformer;
 import com.onbank.http.AuthUser;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
-    private final AuthUser authUser;
+    private final UserDetailedService userDetailedService;
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
@@ -30,7 +32,7 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public UserDto getUser() {
-        return UserTransformer.convertToDto(authUser.getUser());
+    public UserDetailedDto getUser() {
+        return userDetailedService.getUserDetails();
     }
 }

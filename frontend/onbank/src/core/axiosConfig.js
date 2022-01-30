@@ -34,7 +34,7 @@ axiosInstanceGet.interceptors.request.use(request => requestHandler(request));
 axiosInstanceGet.interceptors.response.use(response => response, error => errorHandler(error));
 
 axiosInstancePost.interceptors.request.use(request => requestHandler(request));
-axiosInstancePost.interceptors.response.use(response => {toast.success('Utworzono');return response}, error => errorHandler(error));
+axiosInstancePost.interceptors.response.use(response => {toast.success('Sukces');return response}, error => errorHandler(error));
 
 axiosInstanceJTB.interceptors.request.use(request => requestHandler(request));
 axiosInstanceJTB.interceptors.response.use(response => response, error => errorHandler(error));

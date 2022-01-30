@@ -5,17 +5,17 @@ import currencyFormat from 'utils/CurrencyFormat';
 import AccountNumberFormat from 'utils/AccountNumberFormat';
 import { useStyles } from 'themes/accountBarTheme';
 
-const AccountBar = ({ accountData, accountNumber }) => {
+const AccountBar = ({ user }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.wrapper}>
       <div className={classes.divNameAccount}>
         <Typography variant="h5" className={classes.nameAccount}>
-          {accountData.name}
+            Konto standard
         </Typography>
         <Typography variant="h5" className={classes.numberAccount}>
-          {AccountNumberFormat(accountNumber) || 'Brak numeru konta'}
+          {AccountNumberFormat(user.accountNumber) || 'Brak numeru konta'}
         </Typography>
       </div>
 
@@ -24,7 +24,7 @@ const AccountBar = ({ accountData, accountNumber }) => {
           Dostępne środki
         </Typography>
         <Typography variant="h5" className={classes.avalaibleFunds}>
-          {currencyFormat(accountData.availableFunds)}
+          {currencyFormat(user.accountBalance)}
         </Typography>
       </div>
 
@@ -33,17 +33,16 @@ const AccountBar = ({ accountData, accountNumber }) => {
           Blokady
         </Typography>
         <Typography variant="h5" className={classes.lock}>
-          {currencyFormat(accountData.blockedFunds)}
+          {currencyFormat(user.locksAmount)}
         </Typography>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ transactions, userProfile }) => {
-  const accountData = transactions.mockAccountBar;
-  const {accountNumber} = userProfile;
-  return { accountData, accountNumber };
+const mapStateToProps = ({ userProfile }) => {
+    const user = userProfile;
+  return { user };
 };
 
 export default connect(
