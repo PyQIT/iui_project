@@ -66,7 +66,11 @@ public class TransferServiceImpl implements TransferService {
         transfer.setAmount(createTransferDto.getAmount());
         transfer.setOperationType(createTransferDto.getOperationType());
 
-        //account.setAccountBalance(transfer.getAccountBalance()); // <- jest już odejmowana gdzieś indziej
+        if (transfer.getRecipientAccountNumber().equals(transfer.getSenderAccountNumber())) {
+            throw new Exception("Nie możesz wysłać pieniędzy sam do siebie");
+        }
+
+        account.setAccountBalance(transfer.getAccountBalance());
         return transferRepository.save(transfer);
     }
 
@@ -83,8 +87,8 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public BigDecimal getLocksAmount() {
-        List<Transfer> transfers = transferRepository.findByRealizationStateAndDateBeforeAndSenderAccountNumber(
-                TransferState.WAITING, LocalDate.now(),
+        List<Transfer> transfers = transferRepository.findByRealizationStateAndSenderAccountNumber(
+                TransferState.WAITING,
                 authUser.getUser().getAccount().getNumber()
         );
         return transfers.stream()
