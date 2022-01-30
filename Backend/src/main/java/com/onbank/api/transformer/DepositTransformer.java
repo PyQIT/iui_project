@@ -12,6 +12,9 @@ public class DepositTransformer {
     }
 
     public static DepositDto convertToDto(Deposit deposit) {
+        if (deposit == null) {
+            return null;
+        }
         DepositDto dto = new DepositDto();
         BeanUtils.copyProperties(deposit, dto);
         return dto;

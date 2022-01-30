@@ -1,5 +1,6 @@
 package com.onbank.api.controller;
 
+import com.onbank.api.dto.CreateDepositDto;
 import com.onbank.api.dto.DepositDto;
 import com.onbank.api.model.Account;
 import com.onbank.api.model.Deposit;
@@ -34,9 +35,8 @@ public class DepositController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public void createDeposit(@Valid @RequestBody DepositDto depositDto) {
-        //TODO: Potrzebna walidacja!!!!!! Dane tworzącego powinny weryfikowane lub uzupełniane automatycznie
-        depositService.createDeposit(DepositTransformer.convertToEntity(depositDto));
+    public void createDeposit(@Valid @RequestBody CreateDepositDto createDepositDto) throws Exception {
+        depositService.createDeposit(createDepositDto);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -46,6 +46,7 @@ public class DepositController {
         return DepositTransformer.convertToDto(depositService.getDeposit(id));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/balance/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public BigDecimal getBalanceByUserId(@PathVariable Long userId){
@@ -63,7 +64,7 @@ public class DepositController {
     }
 
     @GetMapping("")
-    @ResponseStatus(HttpStatus.OK)
+//    @ResponseStatus(HttpStatus.OK)
     public DepositDto getDeposit(){
         return DepositTransformer.convertToDto(depositService.getDeposit());
     }
