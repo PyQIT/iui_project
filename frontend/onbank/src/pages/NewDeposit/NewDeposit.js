@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Form } from 'formik';
+import { Formik, Form } from 'formik';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import {
     Button,
@@ -12,20 +12,32 @@ import {
     Paper,
 } from '@material-ui/core';
 import { paths } from 'routes/paths';
-import { sendTransactionsAction, setIsSuccessAction } from 'actions/transactionsActions';
 import { useStyles } from 'themes/newDepositTheme';
 import { colorthemeButtonAndDate } from 'themes/customTheme';
 import Slider from 'react-input-slider';
 import 'react-input-range/lib/css/index.css';
+import {createDepositAction} from "../../actions/depositActions";
 
 
-const NewDeposit = ({ isLoading, isSuccess, setIsSuccess }) => {
+const NewDeposit = ({ createDeposit, isLoading, isSuccess, setIsSuccess }) => {
     const classes = useStyles();
     const [state, setState] = useState({ x: 10, wynik: 16});
 
     return (
             <Paper className={classes.root}>
-                    {({errors, touched}) => (
+                <Formik
+                    initialValues={{
+                        x: '',
+                        wynik: '',
+                    }}
+                    onSubmit={() => {
+                        createDeposit({
+                            depositAmount: state.x,
+                            expectedReturn: state.wynik
+                        });
+                    }}
+                >
+                    {({errors, touched, values}) => (
                         <Form className={classes.form}>
                             <div className={classes.inputs}>
 
@@ -90,6 +102,7 @@ const NewDeposit = ({ isLoading, isSuccess, setIsSuccess }) => {
                             </div>
                         </Form>
                     )}
+                </Formik>
             </Paper>
         );
 };
@@ -102,11 +115,8 @@ const mapStateToProps = ({ transactions }) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        sendTransactions: values => {
-            dispatch(sendTransactionsAction(values));
-        },
-        setIsSuccess: status => {
-            dispatch(setIsSuccessAction(status));
+        createDeposit: values => {
+            dispatch(createDepositAction(values));
         },
     };
 };
