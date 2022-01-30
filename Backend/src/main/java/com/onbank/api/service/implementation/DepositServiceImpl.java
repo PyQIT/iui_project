@@ -27,7 +27,7 @@ public class DepositServiceImpl implements DepositService {
     public void createDeposit(CreateDepositDto createDepositDto) throws Exception {
         User user = authUser.getUser();
         Account account = user.getAccount();
-        if (depositRepository.getDepositByAccount(account).orElse(null) != null) {
+        if (depositRepository.findDepositByAccountAndActive(account, true).orElse(null) != null) {
             throw new Exception("Nie można stworzyć kolejnej lokaty");
         }
         BigDecimal depositAmount = createDepositDto.getDepositAmount();

@@ -1,9 +1,11 @@
 package com.onbank.schedulers;
 
+import com.onbank.api.model.Account;
 import com.onbank.api.model.Transfer;
 import com.onbank.api.model.enums.TransferState;
 import com.onbank.api.model.csv.CSVToTransfer;
 import com.onbank.api.model.csv.TransferToCSV;
+import com.onbank.api.repository.AccountRepository;
 import com.onbank.api.repository.TransferRepository;
 import com.onbank.ftp.FtpConnection;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
@@ -34,6 +36,7 @@ public class TransferSessions {
     String transferRemote = "/transfer.csv";
 
     private final TransferRepository transferRepository;
+    private final AccountRepository accountRepository;
 
     @Scheduled(cron = "${onbank.outgoing.transfer.date}")
     public void outgoingTransferMorningSession() {
@@ -72,6 +75,8 @@ public class TransferSessions {
         String incomingFolders = "csv/incoming";
 
         List<Transfer> transferCSV;
+        List<Account> accounts = accountRepository.findAll();
+
         try(FtpConnection ftpConnection = new FtpConnection(server, port, user, password)){
             if(!Paths.get(incomingFolders).toFile().exists()) {
                 new File("csv").mkdir();
@@ -84,6 +89,16 @@ public class TransferSessions {
             transferCSV.stream()
                     .peek(transfer -> transfer.setRealizationState(TransferState.REALIZED))
                     .forEach((transferRepository::save));
+
+            for (Transfer transfer: transferCSV) {
+                for(Account account: accounts) {
+                    if(transfer.getRecipientAccountNumber().equals(account.getNumber())){
+                        account.setAccountBalance(account.getAccountBalance().add(transfer.getAmount()));
+                    }
+                }
+            }
+
+            accountRepository.saveAll(accounts);
 
         }catch(IOException ex){
             System.out.println("------------ IO exception ------------");
