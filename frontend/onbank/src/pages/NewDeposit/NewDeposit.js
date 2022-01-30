@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Formik, Form } from 'formik';
+import { Form } from 'formik';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import {
     Button,
@@ -16,34 +16,16 @@ import { sendTransactionsAction, setIsSuccessAction } from 'actions/transactions
 import { useStyles } from 'themes/newDepositTheme';
 import { colorthemeButtonAndDate } from 'themes/customTheme';
 import Slider from 'react-input-slider';
-import { newTransferSchema } from './newDepositSchema';
 import 'react-input-range/lib/css/index.css';
 
 
-const NewDeposit = ({ sendTransactions, isLoading, isSuccess, setIsSuccess }) => {
+const NewDeposit = ({ isLoading, isSuccess, setIsSuccess }) => {
     const classes = useStyles();
-    const [setBankName] = useState(null);
     const [state, setState] = useState({ x: 10, wynik: 16});
 
     return (
             <Paper className={classes.root}>
-                <Formik
-                    initialValues={{
-                        receiver: '',
-                        accountNumber: '',
-                        description: '',
-                        amount: '',
-                        date: new Date(),
-                        saveReceiver: false,
-                    }}
-                    validationSchema={() => newTransferSchema(setBankName)}
-                    validateOnBlur
-                    validateOnChange
-                    onSubmit={values => {
-                        sendTransactions(values);
-                    }}
-                >
-                    {({errors, touched, handleChange, handleBlur, values}) => (
+                    {({errors, touched}) => (
                         <Form className={classes.form}>
                             <div className={classes.inputs}>
 
@@ -100,7 +82,7 @@ const NewDeposit = ({ sendTransactions, isLoading, isSuccess, setIsSuccess }) =>
                                     )}
                                     {isSuccess ? (
                                         <>
-                                            <Redirect to={paths.transactions}/>
+                                            <Redirect to={paths.newDeposit}/>
                                             {setIsSuccess(false)}
                                         </>
                                     ) : null}
@@ -108,7 +90,6 @@ const NewDeposit = ({ sendTransactions, isLoading, isSuccess, setIsSuccess }) =>
                             </div>
                         </Form>
                     )}
-                </Formik>
             </Paper>
         );
 };
