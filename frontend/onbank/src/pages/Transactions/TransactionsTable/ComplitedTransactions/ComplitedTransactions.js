@@ -23,8 +23,8 @@ const mapStateToProps = ({ transactions, userProfile }) => {
         res.id,
         res.date,
         res.recipientAccountNumber === userProfile.accountNumber
-          ? `${res.senderName || ''},${res.senderAccountNumber || ''}`
-          : `${res.recipientName || ''},${res.recipientAccountNumber || ''}`,
+          ? `${res.recipientName || ''},${res.recipientAccountNumber || ''}`
+          : `${res.senderName || ''},${res.senderAccountNumber || ''}`,
         res.description,
         res.operationType,
         res.recipientAccountNumber === userProfile.accountNumber ? res.amount : -1 * res.amount,

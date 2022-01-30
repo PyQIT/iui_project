@@ -33,7 +33,7 @@ const AccountBar = ({ user }) => {
           Blokady
         </Typography>
         <Typography variant="h5" className={classes.lock}>
-          {currencyFormat(user.locksAmount)}
+          {currencyFormat(-1 * user.locksAmount)}
         </Typography>
       </div>
     </div>
