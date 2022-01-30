@@ -1,7 +1,9 @@
 package com.onbank.api.service.implementation;
 
+import com.onbank.api.dto.CreateDepositDto;
 import com.onbank.api.model.Account;
 import com.onbank.api.model.Deposit;
+import com.onbank.api.model.User;
 import com.onbank.api.repository.AccountRepository;
 import com.onbank.api.repository.DepositRepository;
 import com.onbank.api.service.DepositService;
@@ -22,15 +24,27 @@ public class DepositServiceImpl implements DepositService {
     private final AuthUser authUser;
 
     @Override
-    public Deposit createDeposit(Deposit deposit){
-        Account account = deposit.getAccount();
+    public void createDeposit(CreateDepositDto createDepositDto) throws Exception {
+        User user = authUser.getUser();
+        Account account = user.getAccount();
+        BigDecimal depositAmount = createDepositDto.getDepositAmount();
+        BigDecimal expectedReturn = createDepositDto.getExpectedReturn();
+
+        Deposit deposit = new Deposit();
+        deposit.setAccount(account);
+        deposit.setReturnBalance(depositAmount.multiply(deposit.getDepositInterest()));
+        if (!deposit.getReturnBalance().equals(expectedReturn)) {
+            throw new Exception("Niepoprawna kwota zwrotu");
+        }
+        deposit.setDepositBalance(depositAmount);
+        if (deposit.getDepositBalance().compareTo(account.getAccountBalance()) > 0) {
+            throw new Exception("Niewystarczające środki");
+        }
+
         account.setAccountBalance(account.getAccountBalance().subtract(deposit.getDepositBalance()));
         accountRepository.save(account);
 
-        deposit.setDepositInterest(new BigDecimal("1.03"));
-        deposit.setReturnBalance(deposit.getDepositBalance().multiply(deposit.getDepositInterest()));
-
-        return depositRepository.save(deposit);
+        depositRepository.save(deposit);
     }
 
     @Override
