@@ -41,8 +41,8 @@ export const routes = [
     path: paths.newDeposit,
     component: NewDeposit,
   },
-  {
+/*  {
     path: paths.login,
     component: Login,
-  },
+  },*/
 ];

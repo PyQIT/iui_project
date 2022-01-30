@@ -1,10 +1,9 @@
-import React, { Fragment, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import React, {Fragment, useEffect} from 'react';
+import {connect} from 'react-redux';
+import {Link, withRouter} from 'react-router-dom';
 import {
   AppBar,
   Button,
-  ButtonGroup,
   Divider,
   Drawer,
   Hidden,
@@ -19,11 +18,10 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
-import { AccountCircle, SwapHoriz, ViewHeadline, ViewList, AccountBalanceWallet } from '@material-ui/icons';
-import { paths } from 'routes/paths';
-import { useStyles } from 'themes/appBarTheme';
-import { getUserProfileAction } from 'actions/userProfileActions';
-import Login from '../pages/User/Login';
+import {AccountBalanceWallet, AccountCircle, SwapHoriz, ViewHeadline, ViewList} from '@material-ui/icons';
+import {paths} from 'routes/paths';
+import {useStyles} from 'themes/appBarTheme';
+import {getUserProfileAction} from 'actions/userProfileActions';
 import Logout from '../pages/User/Logout';
 
 const bookmarkArray = [

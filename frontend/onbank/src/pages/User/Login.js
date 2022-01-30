@@ -5,6 +5,7 @@ import '../../themes/login.css';
 import {Typography} from "@material-ui/core";
 import Auth from "../../API/security/authentication";
 import AuthUtil from "../../API/security/authenticationUtil";
+import {paths} from "../../routes/paths";
 
 const Login = () => {
 
@@ -16,13 +17,14 @@ const Login = () => {
         if (!AuthUtil.isLoggedIn()) {
             Auth.login(event.target[0].value, event.target[1].value).then(() => {
                 console.log('Login success');
-                history.push("/transactions/completed-transactions");
+                history.push(paths.completedTransactions);
             });
         }
-
-
     };
 
+    if (AuthUtil.isLoggedIn()) {
+        history.push(paths.completedTransactions);
+    }
     return (
         <div className="container">
             <form className="form-signin" onSubmit={onSubmit}>
