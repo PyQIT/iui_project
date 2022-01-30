@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Formik, Form } from 'formik';
@@ -11,18 +11,31 @@ import {
     InputLabel,
     Paper,
 } from '@material-ui/core';
+import Axios from 'axios';
 import { paths } from 'routes/paths';
 import { useStyles } from 'themes/newDepositTheme';
 import { colorthemeButtonAndDate } from 'themes/customTheme';
 import Slider from 'react-input-slider';
 import 'react-input-range/lib/css/index.css';
-import {createDepositAction} from "../../actions/depositActions";
+import {createDepositAction, getDepositAction} from "../../actions/depositActions";
 import {getUserProfileAction} from "../../actions/userProfileActions";
 
 
-const NewDeposit = ({ createDeposit, isLoading, isSuccess, setIsSuccess, getUserProfile }) => {
+
+const NewDeposit = ({ createDeposit, isLoading, isSuccess, setIsSuccess, getUserProfile}) => {
     const classes = useStyles();
     const [state, setState] = useState({ x: 10, wynik: 16});
+    const [setdepositDisplay] = useState(null);
+
+
+        const getDepositDisplay = () => {
+            Axios.get("/deposits/balance").then(
+                (response) => {
+                    console.log(response);
+                    setdepositDisplay(response.data);
+                }
+            );
+        }
 
     return (
             <Paper className={classes.root}>
@@ -39,7 +52,7 @@ const NewDeposit = ({ createDeposit, isLoading, isSuccess, setIsSuccess, getUser
                         getUserProfile();
                     }}
                 >
-                    {({errors, touched, values}) => (
+                    {({errors, touched}) => (
                         <Form className={classes.form}>
                             <div className={classes.inputs}>
 
@@ -107,7 +120,10 @@ const NewDeposit = ({ createDeposit, isLoading, isSuccess, setIsSuccess, getUser
                 </Formik>
 
                 <div className={classes.depositContainer}>
-                    <div className={classes.depositResult}>test</div>
+                    <div className={classes.depositResult}>
+                        {/* eslint-disable-next-line react/button-has-type */}
+                        <button onClick={getDepositDisplay}>Odbierz</button>
+                    </div>
                 </div>
             </Paper>
         );
@@ -123,6 +139,9 @@ const mapDispatchToProps = dispatch => {
     return {
         createDeposit: values => {
             dispatch(createDepositAction(values));
+        },
+        getDeposit: () => {
+            dispatch(getDepositAction());
         },
         getUserProfile: () => {
             dispatch(getUserProfileAction());

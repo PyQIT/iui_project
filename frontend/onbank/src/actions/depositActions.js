@@ -26,6 +26,7 @@ export const createDepositAction = data => dispatch => {
         });
 }
 
+
 export const getDepositAction = name => dispatch => {
     return getDepositApi()
         .then(response => {
