@@ -19,4 +19,6 @@ public interface TransferRepository extends JpaRepository<Transfer, Long> {
     //Optional<Transfer> findByIdAndSenderAccountNumber(Long id, String senderAccountNumber);
     Optional<Transfer> findByIdAndSenderAccountNumberOrIdAndRecipientAccountNumber(Long id, String senderAccountNumber,Long id2, String recipientAccountNumber);
     List<Transfer> getTransferByRealizationStateInAndRecipientAccountNumber(List<TransferState> transferStates, String recipientAccountNumber);
+
+    List<Transfer> findByRealizationState(TransferState waiting);
 }

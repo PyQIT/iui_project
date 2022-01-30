@@ -42,7 +42,7 @@ public class TransferSessions {
         String transferOutcoming = "transferOutcoming.csv";
         String outcomingFolders = "csv/outcoming/";
 
-        List<Transfer> transfers = transferRepository.findByRealizationStateAndDateBefore(TransferState.WAITING,LocalDate.now());
+        List<Transfer> transfers = transferRepository.findByRealizationState(TransferState.WAITING);
 
         transfers.stream()
                 .peek(transfer -> transfer.setRealizationState(TransferState.IN_PROGRESS))
