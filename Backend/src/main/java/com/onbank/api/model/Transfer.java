@@ -48,6 +48,9 @@ public class Transfer extends EntityCore{
     @Positive(message = "Amount must be bigger than 0,00.")
     private BigDecimal amount;
 
+    @Column(name = "accountbalance", nullable = false)
+    private BigDecimal accountBalance;
+
     @Column(name = "realizationstate", nullable = false)
     @NotNull(message = "Transfer state cannot be empty.")
     @Enumerated(EnumType.STRING)
