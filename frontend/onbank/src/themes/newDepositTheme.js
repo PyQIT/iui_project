@@ -63,4 +63,12 @@ export const useStyles = makeStyles(theme => ({
         color: '#27ae60',
         display: 'inline',
     },
+
+    depositContainer: {
+        display: 'flex',
+    },
+    depositResult: {
+        margin: 'auto',
+        padding: 25,
+    },
 }));
