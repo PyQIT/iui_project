@@ -1,5 +1,4 @@
 import * as Yup from 'yup';
-import { getIBANDataApi } from 'API/jakitobankAPI';
 
 export const newTransferSchema = setBankName => {
   const requiredMessage = 'Wymagane';
@@ -13,18 +12,9 @@ export const newTransferSchema = setBankName => {
       .required(requiredMessage)
       .test('accountValidate', 'Błędny numer ', value => {
         if (patt.test(value)) {
-          const returnValue = getIBANDataApi(value).then(({ data }) => {
-            console.log(data);
-            if (data.result === 200) {
-              setBankName(data.data.bank.bank_name);
-              return true;
-            }
-            return false;
-          });
-          return returnValue;
+          setBankName("Numer poprawny");
         }
-        setBankName(null);
-        return false;
+        return true;
       }),
     description: Yup.string()
       .min(2, 'Opis jest za krótki')

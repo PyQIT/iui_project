@@ -57,7 +57,7 @@ const NewDeposit = ({ sendTransactions, isLoading, isSuccess, setIsSuccess }) =>
                                         <Slider className={classes.amoutSlider}
                                             axis="x"
                                             x={state.x}
-                                            xmin={0}
+                                            xmin={1}
                                             xmax={10000}
                                             onChange={({ x }) => setState(state => ({ ...state, x }))}
                                                 styles={{
