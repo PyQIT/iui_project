@@ -13,7 +13,7 @@ const Login = () => {
     const onSubmit = (event) => {
         event.preventDefault();
 
-        if (AuthUtil.isLoggedIn()) {
+        if (!AuthUtil.isLoggedIn()) {
             Auth.login(event.target[0].value, event.target[1].value).then(() => {
                 console.log('Login success');
                 history.push("/transactions/completed-transactions");
