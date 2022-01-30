@@ -23,7 +23,7 @@ import 'react-input-range/lib/css/index.css';
 const NewDeposit = ({ sendTransactions, isLoading, isSuccess, setIsSuccess }) => {
     const classes = useStyles();
     const [setBankName] = useState(null);
-    const [state, setState] = useState({ x: 10, wynik: 0});
+    const [state, setState] = useState({ x: 10, wynik: 16});
 
     return (
             <Paper className={classes.root}>
