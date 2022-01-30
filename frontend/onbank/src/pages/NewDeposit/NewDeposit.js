@@ -23,9 +23,9 @@ import 'react-input-range/lib/css/index.css';
 const NewDeposit = ({ sendTransactions, isLoading, isSuccess, setIsSuccess }) => {
     const classes = useStyles();
     const [setBankName] = useState(null);
-    const [state, setState] = useState({ x: 10});
+    const [state, setState] = useState({ x: 10, wynik: 0});
 
-        return (
+    return (
             <Paper className={classes.root}>
                 <Formik
                     initialValues={{
@@ -83,7 +83,7 @@ const NewDeposit = ({ sendTransactions, isLoading, isSuccess, setIsSuccess }) =>
                                         className={classes.textFieldAmount}
                                         error={!!(errors.amount && touched.amount)}
                                     >
-                                        <InputLabel htmlFor="amountInput">Zwrot lokaty po roku</InputLabel>
+                                        <InputLabel htmlFor="amountInput">Zwrot lokaty po roku:  <div className={classes.result}>{state.wynik = (106 * state.x)/100}</div></InputLabel>
                                     </FormControl>
                                 </div>
 

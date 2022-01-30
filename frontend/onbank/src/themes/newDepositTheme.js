@@ -30,8 +30,8 @@ export const useStyles = makeStyles(theme => ({
         minWidth: "40%",
     },
     inputStyle:{
-        margin: 'auto auto 20px',
-        width: "30%",
+        margin: 'auto auto auto',
+        width: "100%",
     },
     inputInRange:{
         display: 'flex',
@@ -57,5 +57,10 @@ export const useStyles = makeStyles(theme => ({
             backgroundColor: '#E3E5E1',
             borderRadius: 10,
         },
+    },
+    result: {
+        fontWeight: 600,
+        color: '#27ae60',
+        display: 'inline',
     },
 }));
