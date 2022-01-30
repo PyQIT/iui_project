@@ -23,6 +23,7 @@ public class CSVToTransfer {
         mapping.put("description", "description");
         mapping.put("operationType", "operationType");
         mapping.put("amount", "amount");
+        mapping.put("accountBalance", "accountBalance");
         mapping.put("realizationState", "realizationState");
         mapping.put("senderName", "senderName");
         mapping.put("senderAccountNumber", "senderAccountNumber");
