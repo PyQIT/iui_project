@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Formik, Form } from 'formik';
@@ -11,7 +11,6 @@ import {
     InputLabel,
     Paper,
 } from '@material-ui/core';
-import Axios from 'axios';
 import { paths } from 'routes/paths';
 import { useStyles } from 'themes/newDepositTheme';
 import { colorthemeButtonAndDate } from 'themes/customTheme';
@@ -22,20 +21,9 @@ import {getUserProfileAction} from "../../actions/userProfileActions";
 
 
 
-const NewDeposit = ({ createDeposit, isLoading, isSuccess, setIsSuccess, getUserProfile}) => {
+const NewDeposit = ({ createDeposit, isLoading, isSuccess, setIsSuccess, getUserProfile, getDeposit }) => {
     const classes = useStyles();
     const [state, setState] = useState({ x: 10, wynik: 16});
-    const [setdepositDisplay] = useState(null);
-
-
-        const getDepositDisplay = () => {
-            Axios.get("/deposits/balance").then(
-                (response) => {
-                    console.log(response);
-                    setdepositDisplay(response.data);
-                }
-            );
-        }
 
     return (
             <Paper className={classes.root}>
@@ -122,7 +110,7 @@ const NewDeposit = ({ createDeposit, isLoading, isSuccess, setIsSuccess, getUser
                 <div className={classes.depositContainer}>
                     <div className={classes.depositResult}>
                         {/* eslint-disable-next-line react/button-has-type */}
-                        <button onClick={getDepositDisplay}>Odbierz</button>
+                        <button onClick={getDeposit()}>Odbierz</button>
                     </div>
                 </div>
             </Paper>
