@@ -14,30 +14,13 @@ import {getUserProfileAction} from "../../actions/userProfileActions";
 import {getDepositBareApi} from "../../API/depositAPI";
 
 
-const NewDeposit = ({createDeposit, isLoading, isSuccess, setIsSuccess, getUserProfile, getDeposit}) => {
+const NewDeposit = ({createDeposit, isLoading, isSuccess, getUserProfile, getDeposit}) => {
     const classes = useStyles();
     const [state, setState] = useState({x: 10, wynik: 16});
 
 
     var depositData = {};
     var hasDeposit = false;
-
-    const checkDeposit = () => {
-        getDepositBareApi()
-            .then(response => {
-                if (response.status === 204) {
-                    hasDeposit = false;
-                } else {
-                    depositData = response.data;
-                    hasDeposit = true;
-                    console.log(response)
-                }
-            })
-            .catch(error => {
-                hasDeposit = false;
-                console.log(error);
-            });
-    }
 
     return (
         <Paper className={classes.root}>
@@ -70,7 +53,7 @@ const NewDeposit = ({createDeposit, isLoading, isSuccess, setIsSuccess, getUserP
                                                 x={state.x}
                                                 xmin={1}
                                                 xmax={10000}
-                                                onChange={({x}) => setState(state => ({...state, x}))}
+                                                onChange={({x}) => setState(s => ({...s, x}))}
                                                 styles={{
                                                     active: {
                                                         backgroundColor: '#27AE60'
@@ -115,8 +98,7 @@ const NewDeposit = ({createDeposit, isLoading, isSuccess, setIsSuccess, getUserP
                                     )}
                                     {isSuccess ? (
                                         <>
-                                            <Redirect to={paths.newDeposit}/>
-                                            {setIsSuccess(false)}
+                                            
                                         </>
                                     ) : null}
                                 </div>
@@ -127,9 +109,8 @@ const NewDeposit = ({createDeposit, isLoading, isSuccess, setIsSuccess, getUserP
 
                 <div className={classes.depositContainer}>
                     <div className={classes.depositResult}>
-                        {/* eslint-disable-next-line react/button-has-type */}
                         <button onClick={() => {
-                            checkDeposit()
+                            getDeposit()
                         }}>Odbierz
                         </button>
                     </div>
@@ -140,8 +121,8 @@ const NewDeposit = ({createDeposit, isLoading, isSuccess, setIsSuccess, getUserP
 };
 
 
-const mapStateToProps = ({ transactions }) => {
-    const { isLoading, isSuccess } = transactions;
+const mapStateToProps = ({ deposit }) => {
+    const { isLoading, isSuccess } = deposit;
     return { isLoading, isSuccess };
 };
 
