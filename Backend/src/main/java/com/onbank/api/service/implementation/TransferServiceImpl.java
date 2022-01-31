@@ -1,21 +1,23 @@
 package com.onbank.api.service.implementation;
 
 import com.onbank.api.dto.CreateTransferDto;
+import com.onbank.api.dto.GetTransferDto;
 import com.onbank.api.model.Account;
 import com.onbank.api.model.Transfer;
 import com.onbank.api.model.User;
 import com.onbank.api.model.enums.TransferState;
 import com.onbank.api.repository.TransferRepository;
 import com.onbank.api.service.TransferService;
+import com.onbank.api.transformer.TransferTransformer;
 import com.onbank.exceptions.TransferNotFoundException;
 import com.onbank.http.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -25,7 +27,8 @@ public class TransferServiceImpl implements TransferService {
     private final AuthUser authUser;
 
     @Override
-    public List<Transfer> getTransfers() {
+    public List<GetTransferDto> getTransfers() {
+        Account account = authUser.getUser().getAccount();
         List<Transfer> sent = transferRepository.getTransferByRealizationStateInAndSenderAccountNumber(
                 Collections.singletonList(TransferState.REALIZED),
                 authUser.getUser().getAccount().getNumber()
@@ -35,7 +38,13 @@ public class TransferServiceImpl implements TransferService {
                 authUser.getUser().getAccount().getNumber()
         );
         sent.addAll(received);
-        return sent;
+        List<GetTransferDto> getTransfersDto = sent.stream().map(TransferTransformer::convertToDto).collect(Collectors.toList());
+/*        getTransfersDto.forEach(f -> {
+            f.setAccountBalance((
+                    account.getNumber().equals(f.getSenderAccountNumber())
+                            ? f. : ))
+        });*/
+        return getTransfersDto;
     }
 
     @Override
@@ -57,7 +66,7 @@ public class TransferServiceImpl implements TransferService {
         if (account.getAccountBalance().compareTo(createTransferDto.getAmount()) < 0) {
             throw new Exception("Niewystarczające środki");
         }
-        transfer.setAccountBalance(account.getAccountBalance().subtract(createTransferDto.getAmount()));
+        transfer.setSenderAccountBalance(account.getAccountBalance().subtract(createTransferDto.getAmount()));
 
         transfer.setDate(createTransferDto.getDate());
         transfer.setRecipientName(createTransferDto.getRecipientName());
@@ -70,7 +79,7 @@ public class TransferServiceImpl implements TransferService {
             throw new Exception("Nie możesz wysłać pieniędzy sam do siebie");
         }
 
-        account.setAccountBalance(transfer.getAccountBalance());
+        account.setAccountBalance(account.getAccountBalance().subtract(createTransferDto.getAmount()));
         return transferRepository.save(transfer);
     }
 

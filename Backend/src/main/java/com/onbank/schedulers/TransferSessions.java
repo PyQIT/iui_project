@@ -2,9 +2,9 @@ package com.onbank.schedulers;
 
 import com.onbank.api.model.Account;
 import com.onbank.api.model.Transfer;
-import com.onbank.api.model.enums.TransferState;
 import com.onbank.api.model.csv.CSVToTransfer;
 import com.onbank.api.model.csv.TransferToCSV;
+import com.onbank.api.model.enums.TransferState;
 import com.onbank.api.repository.AccountRepository;
 import com.onbank.api.repository.TransferRepository;
 import com.onbank.ftp.FtpConnection;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -88,7 +87,13 @@ public class TransferSessions {
 
             transferCSV.stream()
                     .peek(transfer -> transfer.setRealizationState(TransferState.REALIZED))
-                    .forEach((transferRepository::save));
+                    .forEach((entity -> {
+                        entity.setRecipientAccountBalance(
+                                accountRepository.getAccountsByNumber(entity.getRecipientAccountNumber())
+                                        .getAccountBalance().add(entity.getAmount())
+                        );
+                        transferRepository.save(entity);
+                    }));
 
             for (Transfer transfer: transferCSV) {
                 for(Account account: accounts) {

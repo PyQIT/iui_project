@@ -3,6 +3,7 @@ package com.onbank.api.model.csv;
 import com.onbank.api.model.enums.OperationType;
 import com.onbank.api.model.Transfer;
 import com.onbank.api.model.enums.TransferState;
+import com.onbank.api.repository.AccountRepository;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
 import lombok.Data;
@@ -28,8 +29,8 @@ public class CSVTransferDto {
     private String operationType;
     @CsvBindByName
     private BigDecimal amount;
-    @CsvBindByName
-    private BigDecimal accountBalance;
+/*    @CsvBindByName
+    private BigDecimal accountBalance;*/
     @CsvBindByName
     private String realizationState;
     @CsvBindByName
@@ -48,7 +49,7 @@ public class CSVTransferDto {
         if (dto.getOperationType() != null)
             transfer.setOperationType(Enum.valueOf(OperationType.class, dto.getOperationType()));
         transfer.setAmount(dto.getAmount());
-        transfer.setAccountBalance(dto.getAccountBalance());
+//        transfer.setSenderAccountBalance(dto.getAccountBalance());
         if (dto.getRealizationState() != null)
             transfer.setRealizationState(Enum.valueOf(TransferState.class, dto.getRealizationState()));
         transfer.setSenderName(dto.getSenderName());
@@ -66,7 +67,7 @@ public class CSVTransferDto {
         dto.setDescription(transfer.getDescription());
         dto.setOperationType(transfer.getOperationType().name());
         dto.setAmount(transfer.getAmount());
-        dto.setAccountBalance(transfer.getAccountBalance());
+        //dto.setAccountBalance(transfer.getSenderAccountBalance());
         dto.setRealizationState(transfer.getRealizationState().name());
         dto.setSenderName(transfer.getSenderName());
         dto.setSenderAccountNumber(transfer.getSenderAccountNumber());

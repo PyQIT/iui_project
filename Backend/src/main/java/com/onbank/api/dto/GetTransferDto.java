@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
-public class TransferDto {
+public class GetTransferDto {
     private Long id;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
@@ -24,9 +24,11 @@ public class TransferDto {
     @Enumerated(EnumType.STRING)
     private OperationType OperationType;
     private BigDecimal amount;
-    private BigDecimal accountBalance;
     private TransferState realizationState;
     private String senderName;
     private String senderAccountNumber;
+
+    private BigDecimal accountBalance;
+
 
 }

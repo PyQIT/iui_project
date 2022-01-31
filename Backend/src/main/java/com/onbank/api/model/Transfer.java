@@ -47,8 +47,11 @@ public class Transfer extends EntityCore{
     @Positive(message = "Amount must be bigger than 0,00.")
     private BigDecimal amount;
 
-    @Column(name = "accountbalance", nullable = false)
-    private BigDecimal accountBalance;
+    @Column(name = "senderAccountBalance", nullable = true)
+    private BigDecimal senderAccountBalance;
+
+    @Column(name = "recipientAccountBalance", nullable = true)
+    private BigDecimal recipientAccountBalance;
 
     @Column(name = "realizationstate", nullable = false)
     @NotNull(message = "Transfer state cannot be empty.")
@@ -68,5 +71,17 @@ public class Transfer extends EntityCore{
 
     public Transfer() {
         this.realizationState = TransferState.WAITING;
+    }
+
+    public Transfer(LocalDate date, String accountName1, String accountNumber1, String s, OperationType normal, BigDecimal bigDecimal, BigDecimal bigDecimal1, TransferState realized, String accountName2, String accountNumber2) {
+        this.date = date;
+        this.recipientName = recipientName;
+        this.recipientAccountNumber = recipientAccountNumber;
+        this.description = description;
+        this.operationType = operationType;
+        this.amount = amount;
+        this.realizationState = realizationState;
+        this.senderName = senderName;
+        this.senderAccountNumber = senderAccountNumber;
     }
 }

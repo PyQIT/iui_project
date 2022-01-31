@@ -1,17 +1,13 @@
 package com.onbank.api.transformer;
 
 import com.onbank.api.controller.UserControllerTest;
-import com.onbank.api.dto.TransferDto;
 import com.onbank.api.dto.UserDto;
-import com.onbank.api.model.Transfer;
 import com.onbank.api.model.User;
 import com.onbank.http.AuthenticationToken;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

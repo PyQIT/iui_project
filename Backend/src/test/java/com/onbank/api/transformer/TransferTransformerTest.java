@@ -1,6 +1,6 @@
 package com.onbank.api.transformer;
 
-import com.onbank.api.dto.TransferDto;
+import com.onbank.api.dto.GetTransferDto;
 import com.onbank.api.model.Transfer;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,11 +18,11 @@ class TransferTransformerTest {
 
     @Test
     void convertToEntitySuccessTest(){
-        TransferDto transferDto = new TransferDto();
-        transferDto.setRecipientName("Abacki");
+        GetTransferDto getTransferDto = new GetTransferDto();
+        getTransferDto.setRecipientName("Abacki");
         TransferTransformer transferTransformer = new TransferTransformer();
 
-        assertEquals(true, transferDto.getRecipientName().equals(transferTransformer.convertToEntity(transferDto).getRecipientName()));
+        assertEquals(true, getTransferDto.getRecipientName().equals(transferTransformer.convertToEntity(getTransferDto).getRecipientName()));
     }
 
 }

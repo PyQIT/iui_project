@@ -2,21 +2,21 @@ package com.onbank.api.transformer;
 
 import com.onbank.api.dto.CreateTransferDto;
 import com.onbank.api.dto.TransferDetailsDto;
-import com.onbank.api.dto.TransferDto;
+import com.onbank.api.dto.GetTransferDto;
 import com.onbank.api.model.Transfer;
 import org.springframework.beans.BeanUtils;
 
 public class TransferTransformer {
 
-    public static TransferDto convertToDto(Transfer transfer) {
-        TransferDto transferDto = new TransferDto();
-        BeanUtils.copyProperties(transfer, transferDto);
-        return transferDto;
+    public static GetTransferDto convertToDto(Transfer transfer) {
+        GetTransferDto getTransferDto = new GetTransferDto();
+        BeanUtils.copyProperties(transfer, getTransferDto);
+        return getTransferDto;
     }
 
-    public static Transfer convertToEntity(TransferDto transferDto) {
+    public static Transfer convertToEntity(GetTransferDto getTransferDto) {
         Transfer transfer = new Transfer();
-        BeanUtils.copyProperties(transferDto, transfer);
+        BeanUtils.copyProperties(getTransferDto, transfer);
         return transfer;
     }
 
