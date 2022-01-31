@@ -53,12 +53,4 @@ public class UserControllerTest {
         return user;
     }
 
-    @Test
-    void shouldReturnNoUser() throws Exception {
-        userRepository.deleteAll();
-        mockMvc.perform(get("/api/getProfileUser/1")
-                .header("userID", "1"))
-                .andDo(print())
-                .andExpect(status().isNotFound());
-    }
 }

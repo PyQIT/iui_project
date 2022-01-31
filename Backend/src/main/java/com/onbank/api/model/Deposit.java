@@ -40,8 +40,8 @@ public class Deposit  extends EntityCore  {
     private Boolean active;
 
     public Deposit() {
-        endDate = LocalDate.now().plusYears(1);
-//        endDate = LocalDate.now();
+        //endDate = LocalDate.now().plusYears(1);
+        endDate = LocalDate.now();
         depositInterest = new BigDecimal("1.06");
         active = true;
     }

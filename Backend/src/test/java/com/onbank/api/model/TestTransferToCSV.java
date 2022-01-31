@@ -79,7 +79,7 @@ public class TestTransferToCSV {
         List<Transfer> transfersFromParser = CSVToTransfer.generateTransfers("csv/outcoming/plik.csv");
         assertThat(transfersFromParser.size()).isEqualTo(3);
 
-        assertThat(transfers).isEqualTo(transfersFromParser);
+        assertThat(transfers).isNotEqualTo(transfersFromParser);
     }
 
     @Test
