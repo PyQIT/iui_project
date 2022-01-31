@@ -21,8 +21,16 @@ const getDepositBalanceApi = () =>
         url: `${DEPOSIT_URL}/balance`,
     });
 
+const getDepositBareApi = () => {
+    return axiosInstanceGet({
+        url: DEPOSIT_URL
+    });
+}
+
+
 export {
     createDepositApi,
     getDepositApi,
     getDepositBalanceApi,
+    getDepositBareApi
 };

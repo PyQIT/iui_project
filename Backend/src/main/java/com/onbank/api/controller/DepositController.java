@@ -9,6 +9,7 @@ import com.onbank.api.service.UserService;
 import com.onbank.api.transformer.DepositTransformer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -65,8 +66,9 @@ public class DepositController {
 
     @GetMapping("")
 //    @ResponseStatus(HttpStatus.OK)
-    public DepositDto getDeposit(){
-        return DepositTransformer.convertToDto(depositService.getDeposit());
+    public ResponseEntity<DepositDto> getDeposit() {
+        DepositDto depositDto = DepositTransformer.convertToDto(depositService.getDeposit());
+        return new ResponseEntity<>(depositDto, (depositDto == null ? HttpStatus.NO_CONTENT : HttpStatus.OK));
     }
 
 }

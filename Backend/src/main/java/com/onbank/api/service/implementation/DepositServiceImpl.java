@@ -66,6 +66,6 @@ public class DepositServiceImpl implements DepositService {
 
     @Override
     public Deposit getDeposit() {
-        return depositRepository.getDepositByAccount(authUser.getUser().getAccount()).orElse(null);
+        return depositRepository.getDepositByAccountAndActiveIsTrue(authUser.getUser().getAccount()).orElse(null);
     }
 }
